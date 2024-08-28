@@ -1,0 +1,164 @@
+{
+  "tickets": [
+    {
+      "id": 1,
+      "title": "Login page not working",
+      "description": "The login page returns a 500 error when I try to log in.",
+      "sender": "alice@example.com",
+      "receiver": "support@company.com",
+      "status": "OPEN"
+    },
+    {
+      "id": 2,
+      "title": "Feature request: Dark mode",
+      "description": "Can we add a dark mode option to the application?",
+      "sender": "bob@example.com",
+      "receiver": "devteam@company.com",
+      "status": "IN PROGRESS"
+    },
+    {
+      "id": 3,
+      "title": "Payment gateway issue",
+      "description": "Unable to process payments using credit cards.",
+      "sender": "charlie@example.com",
+      "receiver": "support@company.com",
+      "status": "RESOLVED"
+    },
+    {
+      "id": 4,
+      "title": "Profile picture upload failed",
+      "description": "Profile picture upload is failing with a 403 error.",
+      "sender": "david@example.com",
+      "receiver": "support@company.com",
+      "status": "REOPENED"
+    },
+    {
+      "id": 5,
+      "title": "Bug in the dashboard graph rendering",
+      "description": "The graphs in the dashboard are not showing data for the last week.",
+      "sender": "eve@example.com",
+      "receiver": "devteam@company.com",
+      "status": "ON HOLD"
+    },
+    {
+      "id": 6,
+      "title": "Cancelled subscription issue",
+      "description": "I am still being charged after cancelling my subscription.",
+      "sender": "frank@example.com",
+      "receiver": "billing@company.com",
+      "status": "CANCELLED"
+    },
+    {
+      "id": 7,
+      "title": "Email notification not received",
+      "description": "I did not receive the email notification for the password reset.",
+      "sender": "grace@example.com",
+      "receiver": "support@company.com",
+      "status": "OPEN"
+    },
+    {
+      "id": 8,
+      "title": "Search functionality broken",
+      "description": "The search feature on the website is returning no results.",
+      "sender": "hannah@example.com",
+      "receiver": "devteam@company.com",
+      "status": "IN PROGRESS"
+    },
+    {
+      "id": 9,
+      "title": "User profile page not loading",
+      "description": "The user profile page is not loading properly after the update.",
+      "sender": "ian@example.com",
+      "receiver": "support@company.com",
+      "status": "REOPENED"
+    },
+    {
+      "id": 10,
+      "title": "API rate limit exceeded",
+      "description": "The application is hitting the API rate limit too frequently.",
+      "sender": "julia@example.com",
+      "receiver": "devteam@company.com",
+      "status": "ON HOLD"
+    },
+    {
+      "id": 11,
+      "title": "Error in user registration",
+      "description": "New users are encountering an error during the registration process.",
+      "sender": "ken@example.com",
+      "receiver": "support@company.com",
+      "status": "OPEN"
+    },
+    {
+      "id": 12,
+      "title": "Broken link on homepage",
+      "description": "There is a broken link on the homepage that needs fixing.",
+      "sender": "lisa@example.com",
+      "receiver": "devteam@company.com",
+      "status": "IN PROGRESS"
+    },
+    {
+      "id": 13,
+      "title": "Data export feature not working",
+      "description": "The data export feature is not generating files correctly.",
+      "sender": "michael@example.com",
+      "receiver": "support@company.com",
+      "status": "RESOLVED"
+    },
+    {
+      "id": 14,
+      "title": "Issues with mobile responsiveness",
+      "description": "The site is not responsive on mobile devices.",
+      "sender": "nina@example.com",
+      "receiver": "devteam@company.com",
+      "status": "REOPENED"
+    },
+    {
+      "id": 15,
+      "title": "Form submission error",
+      "description": "The form submission on the contact page is returning an error.",
+      "sender": "oliver@example.com",
+      "receiver": "support@company.com",
+      "status": "OPEN"
+    },
+    {
+      "id": 16,
+      "title": "Database connection issue",
+      "description": "The application is experiencing intermittent database connection issues.",
+      "sender": "paula@example.com",
+      "receiver": "devteam@company.com",
+      "status": "IN PROGRESS"
+    },
+    {
+      "id": 17,
+      "title": "Incorrect user permissions",
+      "description": "Some users are seeing restricted content that should be accessible.",
+      "sender": "quincy@example.com",
+      "receiver": "support@company.com",
+      "status": "ON HOLD"
+    },
+    {
+      "id": 18,
+      "title": "Timeout on data retrieval",
+      "description": "Retrieving large datasets is timing out and failing.",
+      "sender": "rachel@example.com",
+      "receiver": "devteam@company.com",
+      "status": "REOPENED"
+    },
+    {
+      "id": 19,
+      "title": "Authentication failure",
+      "description": "Users are unable to authenticate with their accounts.",
+      "sender": "steve@example.com",
+      "receiver": "support@company.com",
+      "status": "CANCELLED"
+    },
+    {
+      "id": 20,
+      "title": "Visual glitch on checkout page",
+      "description": "There is a visual glitch on the checkout page that affects user experience.",
+      "sender": "tina@example.com",
+      "receiver": "devteam@company.com",
+      "status": "IN PROGRESS"
+    }
+  ]
+}
