@@ -4,7 +4,7 @@ export interface Ticket {
   description: string,
   sender: string,
   receiver: string,
-  status: "OPEN" | "IN PROGRESS" | "RESOLVED" | "REOPENDED" | "ON HOLD" | "CANCELLED",
+  status: "OPEN" | "IN PROGRESS" | "RESOLVED" | "ON HOLD" | "CANCELLED",
   startDate: string,
   endDate: string
 }

@@ -6,7 +6,9 @@
       "description": "The login page returns a 500 error when I try to log in.",
       "sender": "alice@example.com",
       "receiver": "support@company.com",
-      "status": "OPEN"
+      "status": "OPEN",
+      "startDate": "2024-08-01",
+      "endDate": "2024-08-10"
     },
     {
       "id": 2,
@@ -14,7 +16,9 @@
       "description": "Can we add a dark mode option to the application?",
       "sender": "bob@example.com",
       "receiver": "devteam@company.com",
-      "status": "IN PROGRESS"
+      "status": "IN PROGRESS",
+      "startDate": "2024-08-05",
+      "endDate": "2024-09-01"
     },
     {
       "id": 3,
@@ -22,7 +26,9 @@
       "description": "Unable to process payments using credit cards.",
       "sender": "charlie@example.com",
       "receiver": "support@company.com",
-      "status": "RESOLVED"
+      "status": "RESOLVED",
+      "startDate": "2024-07-20",
+      "endDate": "2024-08-15"
     },
     {
       "id": 4,
@@ -30,7 +36,9 @@
       "description": "Profile picture upload is failing with a 403 error.",
       "sender": "david@example.com",
       "receiver": "support@company.com",
-      "status": "REOPENED"
+      "status": "REOPENED",
+      "startDate": "2024-08-10",
+      "endDate": "2024-08-25"
     },
     {
       "id": 5,
@@ -38,7 +46,9 @@
       "description": "The graphs in the dashboard are not showing data for the last week.",
       "sender": "eve@example.com",
       "receiver": "devteam@company.com",
-      "status": "ON HOLD"
+      "status": "ON HOLD",
+      "startDate": "2024-08-15",
+      "endDate": "2024-08-30"
     },
     {
       "id": 6,
@@ -46,7 +56,9 @@
       "description": "I am still being charged after cancelling my subscription.",
       "sender": "frank@example.com",
       "receiver": "billing@company.com",
-      "status": "CANCELLED"
+      "status": "CANCELLED",
+      "startDate": "2024-07-25",
+      "endDate": "2024-08-05"
     },
     {
       "id": 7,
@@ -54,7 +66,9 @@
       "description": "I did not receive the email notification for the password reset.",
       "sender": "grace@example.com",
       "receiver": "support@company.com",
-      "status": "OPEN"
+      "status": "OPEN",
+      "startDate": "2024-08-20",
+      "endDate": "2024-08-28"
     },
     {
       "id": 8,
@@ -62,7 +76,9 @@
       "description": "The search feature on the website is returning no results.",
       "sender": "hannah@example.com",
       "receiver": "devteam@company.com",
-      "status": "IN PROGRESS"
+      "status": "IN PROGRESS",
+      "startDate": "2024-08-18",
+      "endDate": "2024-09-01"
     },
     {
       "id": 9,
@@ -70,7 +86,9 @@
       "description": "The user profile page is not loading properly after the update.",
       "sender": "ian@example.com",
       "receiver": "support@company.com",
-      "status": "REOPENED"
+      "status": "REOPENED",
+      "startDate": "2024-08-25",
+      "endDate": "2024-09-10"
     },
     {
       "id": 10,
@@ -78,7 +96,9 @@
       "description": "The application is hitting the API rate limit too frequently.",
       "sender": "julia@example.com",
       "receiver": "devteam@company.com",
-      "status": "ON HOLD"
+      "status": "ON HOLD",
+      "startDate": "2024-08-22",
+      "endDate": "2024-09-05"
     },
     {
       "id": 11,
@@ -86,7 +106,9 @@
       "description": "New users are encountering an error during the registration process.",
       "sender": "ken@example.com",
       "receiver": "support@company.com",
-      "status": "OPEN"
+      "status": "OPEN",
+      "startDate": "2024-08-01",
+      "endDate": "2024-08-15"
     },
     {
       "id": 12,
@@ -94,7 +116,9 @@
       "description": "There is a broken link on the homepage that needs fixing.",
       "sender": "lisa@example.com",
       "receiver": "devteam@company.com",
-      "status": "IN PROGRESS"
+      "status": "IN PROGRESS",
+      "startDate": "2024-08-10",
+      "endDate": "2024-08-20"
     },
     {
       "id": 13,
@@ -102,7 +126,9 @@
       "description": "The data export feature is not generating files correctly.",
       "sender": "michael@example.com",
       "receiver": "support@company.com",
-      "status": "RESOLVED"
+      "status": "RESOLVED",
+      "startDate": "2024-07-30",
+      "endDate": "2024-08-10"
     },
     {
       "id": 14,
@@ -110,7 +136,9 @@
       "description": "The site is not responsive on mobile devices.",
       "sender": "nina@example.com",
       "receiver": "devteam@company.com",
-      "status": "REOPENED"
+      "status": "REOPENED",
+      "startDate": "2024-08-15",
+      "endDate": "2024-08-30"
     },
     {
       "id": 15,
@@ -118,7 +146,9 @@
       "description": "The form submission on the contact page is returning an error.",
       "sender": "oliver@example.com",
       "receiver": "support@company.com",
-      "status": "OPEN"
+      "status": "OPEN",
+      "startDate": "2024-08-18",
+      "endDate": "2024-08-25"
     },
     {
       "id": 16,
@@ -126,7 +156,9 @@
       "description": "The application is experiencing intermittent database connection issues.",
       "sender": "paula@example.com",
       "receiver": "devteam@company.com",
-      "status": "IN PROGRESS"
+      "status": "IN PROGRESS",
+      "startDate": "2024-08-12",
+      "endDate": "2024-08-28"
     },
     {
       "id": 17,
@@ -134,7 +166,9 @@
       "description": "Some users are seeing restricted content that should be accessible.",
       "sender": "quincy@example.com",
       "receiver": "support@company.com",
-      "status": "ON HOLD"
+      "status": "ON HOLD",
+      "startDate": "2024-08-20",
+      "endDate": "2024-09-01"
     },
     {
       "id": 18,
@@ -142,7 +176,9 @@
       "description": "Retrieving large datasets is timing out and failing.",
       "sender": "rachel@example.com",
       "receiver": "devteam@company.com",
-      "status": "REOPENED"
+      "status": "REOPENED",
+      "startDate": "2024-08-22",
+      "endDate": "2024-09-05"
     },
     {
       "id": 19,
@@ -150,7 +186,9 @@
       "description": "Users are unable to authenticate with their accounts.",
       "sender": "steve@example.com",
       "receiver": "support@company.com",
-      "status": "CANCELLED"
+      "status": "CANCELLED",
+      "startDate": "2024-08-01",
+      "endDate": "2024-08-15"
     },
     {
       "id": 20,
@@ -158,7 +196,9 @@
       "description": "There is a visual glitch on the checkout page that affects user experience.",
       "sender": "tina@example.com",
       "receiver": "devteam@company.com",
-      "status": "IN PROGRESS"
+      "status": "IN PROGRESS",
+      "startDate": "2024-08-25",
+      "endDate": "2024-09-10"
     }
   ]
 }
