@@ -8,9 +8,9 @@ const HomePage = () : JSX.Element => {
   return (
     <div className="">
       <NavBar/>
-      {/* <ManageUserPage/> */}
+      <UserManagePage/>
       {/* <TicketManagePage/> */}
-      <TicketDetailsPage/>
+      {/* <TicketDetailsPage/> */}
     </div>
   )
 }

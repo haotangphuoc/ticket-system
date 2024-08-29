@@ -6,23 +6,31 @@ const TicketEditForm = ({handleEditTicket} : TicketEditFormProps): JSX.Element =
   return(
     <div className="add-form-container">
       <div className="add-form p-4">
-        <h3 className="text-center">Add New User</h3>
+        <h3 className="text-center">Edit Ticket</h3>
         <form>
           <div className="mb-3">
-            <label htmlFor="username" className="form-label">
-              Username
+            <label htmlFor="status" className="form-label fw-bold">
+              Ticket Status:
             </label>
-            <input type="text" className="form-control" id="username" />
+            <select className="form-select" id="status">
+              <option value="OPEN">Open</option>
+              <option value="IN PROGRESS">In Progress</option>
+              <option value="RESOLVED">Resolved</option>
+              <option value="ON HOLD">On Hold</option>
+              <option value="CANCELLED">Cancelled</option>
+            </select>
           </div>
+
           <div className="mb-3">
-            <label htmlFor="email" className="form-label">
-              Email
+            <label htmlFor="comments" className="form-label fw-bold">
+              Comments:
             </label>
-            <input type="email" className="form-control" id="email" />
+            <textarea className="form-control" id="comments" rows={4}></textarea>
           </div>
+
           <div className="d-flex justify-content-center">
             <button type="submit" className="btn btn-primary">
-              Save change
+              Save Changes
             </button>
             <button
               type="button"
