@@ -8,8 +8,8 @@ const HomePage = () : JSX.Element => {
   return (
     <div className="">
       <NavBar/>
-      <UserManagePage/>
-      {/* <TicketManagePage/> */}
+      {/* <UserManagePage/> */}
+      <TicketManagePage/>
       {/* <TicketDetailsPage/> */}
     </div>
   )
