@@ -5,3 +5,28 @@
 .nav {
   width: 100%;
 }
+
+/* Background overlay for the dashboard when the form is open */
+.client-dashboard-overlay {
+  opacity: 0.2;;
+  
+}
+
+/* Add User Form container */
+.add-form-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(255, 255, 255, 1);
+  z-index: 1000; /* Ensure it overlays everything else */
+  width: 400px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  border-radius: 8px;
+}
+
+/* Form styling */
+.add-form {
+  background-color: #fff;
+  border-radius: 8px;
+}

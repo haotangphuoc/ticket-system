@@ -1,7 +1,12 @@
-const TicketInfoTab = (): JSX.Element => {
+interface TicketDashboardProps {
+  handleAddTicket: () => void
+}
+
+const TicketInfoTab = ({ handleAddTicket }: TicketDashboardProps): JSX.Element => {
   return (
-    <div className="container d-flex flex-column justify-content-center vh-100">
-      <div className="mb-4 fs-5 fw-bold">All ticket</div>
+    <div className="container d-flex flex-column vh-100">
+      <div className="m-4 btn btn-outline-primary mx-2" onClick={handleAddTicket}>+ Add ticket</div>
+      <div className="my-4 fs-5 fw-bold">All ticket</div>
       <a className="text-dark" href="">Ticket to handle </a>
       <a className="text-dark" href="">My open ticket</a>
       

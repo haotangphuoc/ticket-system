@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import userService from '../services/userService'
 import { User } from "../../../interfaces/userInterface";
 
-const ManageClientPage = (): JSX.Element => {
+const ClientDashboard = (): JSX.Element => {
   const [users, setUsers] = useState<User[]>([])
 
   useEffect(() => {
@@ -20,17 +20,7 @@ const ManageClientPage = (): JSX.Element => {
   }, [])
 
   return(
-    <div className="p-4">
-      <div className="d-flex flex-row justify-content-between align-items-center">
-        <div className="fs-3 m-4">
-          Users 
-        </div>
-        <div className="btn btn-outline-primary">
-          + Add new user
-        </div>
-      </div>
-
-      <div >
+    <div >
       <table className="table table-hover">
         <thead>
           <tr>
@@ -51,12 +41,10 @@ const ManageClientPage = (): JSX.Element => {
               </tr>
             )
           }
-
         </tbody>
       </table>
-      </div>
     </div>
-  );
+  )
 }
 
-export default ManageClientPage;
+export default ClientDashboard

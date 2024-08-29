@@ -3,7 +3,6 @@ import ticketService from "../services/ticketService"
 import { Ticket } from "../../../interfaces/ticketInterface"
 import '../css/TicketDashboard.css'
 
-
 const TicketDashboard = () : JSX.Element => {
   const [tickets, setTickets] = useState<Ticket[]>([])
   const today = new Date()
