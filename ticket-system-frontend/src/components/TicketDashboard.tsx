@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import ticketService from "../services/ticketService"
-import { Ticket } from "../../../interfaces/ticketInterfaces"
+import { Ticket } from "../../../interfaces/ticketInterface"
 import '../css/TicketDashboard.css'
 
 
@@ -36,7 +36,7 @@ const TicketDashboard = () : JSX.Element => {
   }, [])
   
   return(
-    <div className="w-100 border">
+    <div className="w-100 border border-2">
       <div className="text-center my-4 fs-5 fw-bold">
         My Inbox
       </div>

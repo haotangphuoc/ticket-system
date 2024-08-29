@@ -14,7 +14,7 @@ const NavBar = (): JSX.Element => {
           <a className="nav-link text-light" href="#">Statistics</a>
         </li>
         <li className="nav-item ">
-          <a className="nav-link disabled fw-bolder text-light border" aria-disabled="true">Logout</a>
+          <a className="nav-link disabled fw-bolder text-light " aria-disabled="true"><u>Log out</u></a>
         </li>
       </ul>
     </div>

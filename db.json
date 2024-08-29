@@ -200,5 +200,125 @@
       "startDate": "2024-08-25",
       "endDate": "2024-09-10"
     }
-  ]
+  ],
+  "users": [
+    {
+      "id": "user1",
+      "name": "John Doe",
+      "email": "john.doe@example.com",
+      "role": "ADMINISTRATOR",
+      "tickets": [
+        {
+          "id": "ticket1",
+          "description": "Fix server issue",
+          "status": "open"
+        }
+      ]
+    },
+    {
+      "id": "client1",
+      "name": "Jane Smith",
+      "email": "jane.smith@example.com",
+      "role": "CLIENT",
+      "tickets": [
+        {
+          "id": "ticket2",
+          "description": "Payment issue",
+          "status": "closed"
+        }
+      ]
+    },
+    {
+      "id": "user2",
+      "name": "Sarah Lee",
+      "email": "sarah.lee@example.com",
+      "role": "ADMINISTRATOR",
+      "tickets": [
+        {
+          "id": "ticket3",
+          "description": "System upgrade task",
+          "status": "open"
+        }
+      ]
+    },
+    {
+      "id": "client2",
+      "name": "Tom Hardy",
+      "email": "tom.hardy@example.com",
+      "role": "CLIENT",
+      "tickets": [
+        {
+          "id": "ticket4",
+          "description": "Login issues",
+          "status": "open"
+        }
+      ]
+    },
+    {
+      "id": "user3",
+      "name": "Michael Scott",
+      "email": "michael.scott@example.com",
+      "role": "ADMINISTRATOR",
+      "tickets": []
+    },
+    {
+      "id": "client3",
+      "name": "Pam Beesly",
+      "email": "pam.beesly@example.com",
+      "role": "CLIENT",
+      "tickets": [
+        {
+          "id": "ticket5",
+          "description": "Printer malfunction",
+          "status": "resolved"
+        }
+      ]
+    },
+    {
+      "id": "user4",
+      "name": "Dwight Schrute",
+      "email": "dwight.schrute@example.com",
+      "role": "ADMINISTRATOR",
+      "tickets": [
+        {
+          "id": "ticket6",
+          "description": "Security audit",
+          "status": "open"
+        }
+      ]
+    },
+    {
+      "id": "client4",
+      "name": "Jim Halpert",
+      "email": "jim.halpert@example.com",
+      "role": "CLIENT",
+      "tickets": [
+        {
+          "id": "ticket7",
+          "description": "Project assistance",
+          "status": "in-progress"
+        }
+      ]
+    },
+    {
+      "id": "user5",
+      "name": "Angela Martin",
+      "email": "angela.martin@example.com",
+      "role": "ADMINISTRATOR",
+      "tickets": []
+    },
+    {
+      "id": "client5",
+      "name": "Stanley Hudson",
+      "email": "stanley.hudson@example.com",
+      "role": "CLIENT",
+      "tickets": [
+        {
+          "id": "ticket8",
+          "description": "Monitor issue",
+          "status": "resolved"
+        }
+      ]
+    }
+  ]  
 }

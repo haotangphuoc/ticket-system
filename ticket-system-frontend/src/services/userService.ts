@@ -1,9 +1,9 @@
 import axios from 'axios';
-import { Ticket } from '../../../interfaces/ticketInterface'
+import { User } from '../../../interfaces/userInterface'
 
-const baseUrl = "http://localhost:3000/tickets";
+const baseUrl = "http://localhost:3000/users";
 
-const getAllTickets = async () : Promise<Ticket[] | Error> => {
+const getAllUsers = async () : Promise<User[] | Error> => {
   try {
     const res = await axios.get(baseUrl);
     return res.data;
@@ -16,4 +16,4 @@ const getAllTickets = async () : Promise<Ticket[] | Error> => {
   }
 }
 
-export default { getAllTickets }
+export default { getAllUsers }
