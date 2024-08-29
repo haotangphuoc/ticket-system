@@ -1,8 +1,8 @@
-interface AddUserFormProps {
+interface UserAddFormProps {
   handleAddUser: () => void;
 }
 
-const AddUserForm = ({ handleAddUser }: AddUserFormProps): JSX.Element => {
+const UserAddForm = ({ handleAddUser }: UserAddFormProps): JSX.Element => {
   return (
     <div className="add-form-container">
       <div className="add-form p-4">
@@ -38,4 +38,4 @@ const AddUserForm = ({ handleAddUser }: AddUserFormProps): JSX.Element => {
   );
 };
 
-export default AddUserForm;
+export default UserAddForm;

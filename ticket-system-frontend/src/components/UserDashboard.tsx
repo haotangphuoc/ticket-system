@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import userService from '../services/userService'
 import { User } from "../../../interfaces/userInterface";
 
-const ClientDashboard = (): JSX.Element => {
+const UserDashboard = (): JSX.Element => {
   const [users, setUsers] = useState<User[]>([])
 
   useEffect(() => {
@@ -47,4 +47,4 @@ const ClientDashboard = (): JSX.Element => {
   )
 }
 
-export default ClientDashboard
+export default UserDashboard

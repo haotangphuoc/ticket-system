@@ -1,9 +1,9 @@
-interface AddTicketFormProps {
-  handleAddTicket: () => void;
+interface TicketEditFormProps {
+  handleEditTicket: () => void;
 }
 
-const AddTicketForm = ({ handleAddTicket }: AddTicketFormProps): JSX.Element => {
-  return (
+const TicketEditForm = ({handleEditTicket} : TicketEditFormProps): JSX.Element => {
+  return(
     <div className="add-form-container">
       <div className="add-form p-4">
         <h3 className="text-center">Add New User</h3>
@@ -22,12 +22,12 @@ const AddTicketForm = ({ handleAddTicket }: AddTicketFormProps): JSX.Element => 
           </div>
           <div className="d-flex justify-content-center">
             <button type="submit" className="btn btn-primary">
-              Submit
+              Save change
             </button>
             <button
               type="button"
               className="btn btn-secondary ms-2"
-              onClick={handleAddTicket}
+              onClick={handleEditTicket}
             >
               Cancel
             </button>
@@ -38,4 +38,4 @@ const AddTicketForm = ({ handleAddTicket }: AddTicketFormProps): JSX.Element => 
   );
 };
 
-export default AddTicketForm;
+export default TicketEditForm;

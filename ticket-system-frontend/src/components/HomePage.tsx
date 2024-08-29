@@ -1,14 +1,16 @@
 
-import ManageUserPage from "./ManageUserPage";
-import ManageTicketPage from "./ManageTicketPage";
+import UserManagePage from "./UserManagePage";
+import TicketManagePage from "./TicketManagePage";
 import NavBar from "./NavBar";
+import TicketDetailsPage from "./TicketDetailsPage";
 
 const HomePage = () : JSX.Element => {
   return (
     <div className="">
       <NavBar/>
       {/* <ManageUserPage/> */}
-      <ManageTicketPage/>
+      {/* <TicketManagePage/> */}
+      <TicketDetailsPage/>
     </div>
   )
 }

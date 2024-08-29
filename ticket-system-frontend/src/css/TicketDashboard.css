@@ -4,3 +4,12 @@
   text-overflow: ellipsis;     
   width: 200px;                
 }
+
+.custom-hover {
+  background-color: #f8f9fa; /* Light gray background initially */
+  transition: background-color 0.3s ease; /* Smooth transition */
+}
+
+.custom-hover:hover {
+  background-color: #b2c4d7; /* Change to Bootstrap's primary color on hover */
+}

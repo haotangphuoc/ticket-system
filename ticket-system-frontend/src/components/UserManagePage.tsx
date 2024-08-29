@@ -1,9 +1,9 @@
-import AddUserForm from "./AddUserForm";
-import ClientDashboard from "./ClientDashboard";
+import UserAddForm from "./UserAddForm";
+import UserDashboard from "./UserDashboard";
 import { useState } from "react";
 
 
-const ManageUserPage = (): JSX.Element => {
+const UserManagePage = (): JSX.Element => {
   const [showForm, setShowForm] = useState(false);
 
   const handleAddUser = () => {
@@ -12,6 +12,8 @@ const ManageUserPage = (): JSX.Element => {
 
   return(
     <div className={`p-4 position-relative`}>
+      {showForm && <UserAddForm handleAddUser={handleAddUser}/>}
+
       <div className={showForm ? "client-dashboard-overlay" : ""}>
         <div className="d-flex flex-row justify-content-between align-items-center">
           <div className="fs-3 m-4">
@@ -21,11 +23,10 @@ const ManageUserPage = (): JSX.Element => {
             + Add new user
           </div>
         </div>
-        <ClientDashboard/>
+        <UserDashboard/>
       </div>
-      {showForm && <AddUserForm handleAddUser={handleAddUser}/>}
     </div>
   );
 }
 
-export default ManageUserPage;
+export default UserManagePage;

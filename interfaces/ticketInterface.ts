@@ -1,10 +1,19 @@
+type TicketStatus = "OPEN" | "IN PROGRESS" | "RESOLVED" | "ON HOLD" | "CANCELLED"
+
+export interface TicketActivity {
+  id: string,
+  status: TicketStatus,
+  comments?: string
+}
+
 export interface Ticket {
   id: string,
   title: string,
   description: string,
   sender: string,
   receiver: string,
-  status: "OPEN" | "IN PROGRESS" | "RESOLVED" | "ON HOLD" | "CANCELLED",
+  status: TicketStatus,
   startDate: string,
-  endDate: string
+  endDate: string,
+  activities: TicketActivity[]
 }

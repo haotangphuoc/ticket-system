@@ -42,7 +42,7 @@ const TicketDashboard = () : JSX.Element => {
       {
         <div className="ticket-dashboard">
           {tickets.map(ticket => (
-            <div className="container border p-2 d-flex flex-row align-items-center justify-content-between" key={ticket.id}>
+            <div className="container border p-2 d-flex flex-row align-items-center justify-content-between custom-hover" key={ticket.id} onClick={() => console.log("helo")}>
               <div className="ticket-general-info">
                 <div className="fs-5 fw-bold">{ticket.sender}</div>
                 <div className="fs-7 fw-bold">{ticket.title}</div>
