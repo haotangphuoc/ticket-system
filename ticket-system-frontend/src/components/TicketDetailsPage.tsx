@@ -2,37 +2,34 @@ import { Ticket } from '../../../interfaces/ticketInterface'
 import { useState } from 'react';
 import TicketEditForm from './TicketEditForm';
 
-const TicketDetailsPage = (): JSX.Element => {
+interface TicketDetailsPageProps {
+  ticket: Ticket | null
+}
+
+interface TicketDetailsProps {
+  ticket: Ticket 
+}
+
+const TicketDetailsPage = ({ ticket }: TicketDetailsPageProps): JSX.Element => {
+  return(
+    <div>
+      {ticket !== null 
+        ? <TicketDetails ticket={ticket}/> 
+        : <h1>UNABLE TO FIND TICKET</h1>}
+    </div>
+  );
+}
+
+const TicketDetails = ({ ticket }: TicketDetailsProps): JSX.Element => {
   const [showForm, setShowForm] = useState(false);
 
   const handleEditTicket = () => {
     setShowForm(!showForm);
   };
 
-  const ticket: Ticket = {
-    id: "12345",
-    title: "Issue with Login Functionality",
-    description: "User is unable to log into the system using their credentials.",
-    sender: "John Doe",
-    receiver: "Support Team",
-    status: "IN PROGRESS",
-    startDate: "2024-08-28T10:00:00Z",  // ISO string format for dates
-    endDate: "2024-08-29T16:00:00Z",
-    activities: [
-      {
-        id: "act-001",
-        status: "OPEN",
-        comments: "Ticket created and assigned to the support team."
-      },
-      {
-        id: "act-002",
-        status: "IN PROGRESS",
-        comments: "Working on the issue. Checking login API."
-      }
-    ]
-  };
-  
-  return(
+  console.log(ticket)
+
+  return (
     <div>
       {showForm && <TicketEditForm handleEditTicket={handleEditTicket}/>}
 
@@ -72,7 +69,7 @@ const TicketDetailsPage = (): JSX.Element => {
         </div>
       </div>
     </div>
-  );
+  )
 }
 
 export default TicketDetailsPage;

@@ -3,7 +3,7 @@ import TicketDashboard from "./TicketDashboard";
 import { useState } from "react";
 import TicketAddForm from "./TicketAddForm";
 
-const ManageTicketPage = (): JSX.Element => {
+const TicketManagePage = (): JSX.Element => {
   const [showForm, setShowForm] = useState(false);
 
   const handleAddTicket = () => {
@@ -27,4 +27,4 @@ const ManageTicketPage = (): JSX.Element => {
   );
 }
 
-export default ManageTicketPage;
+export default TicketManagePage;

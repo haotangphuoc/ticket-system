@@ -1,4 +1,5 @@
 import '../css/Homepage.css';
+import { Link } from 'react-router-dom'
 
 const NavBar = (): JSX.Element => {
   const handleLogout = (e: React.SyntheticEvent) => {
@@ -11,22 +12,16 @@ const NavBar = (): JSX.Element => {
     }
   }
 
+  const linkClassAttributes = "nav-link fs-5 text-light"
+
   return (
-    <div className="nav-bar-container bg-primary p-2">
-      <ul className="nav d-flex align-items-end justify-content-between">
-        <li className="nav-item">
-          <a className="nav-link fw-bolder fs-3 text-light" aria-current="page" href="#">Ticket4Me</a>
-        </li>
-        <li className="nav-item">
-          <a className="nav-link text-light" href="#">Users</a>
-        </li>
-        <li className="nav-item">
-          <a className="nav-link text-light" href="#">Tickets</a>
-        </li>
-        <li className="nav-item ">
-          <a className="nav-link fw-bolder text-light " aria-disabled="true" onClick={(e) => handleLogout(e)}><u>Log out</u></a>
-        </li>
-      </ul>
+    <div className="bg-primary p-4 d-flex align-items-end justify-content-between">
+      <Link className="nav-link fw-bolder fs-1 text-light" to="/">Ticket 4me</Link>
+      <Link className={linkClassAttributes} to="/users">Users</Link>
+      <Link className={linkClassAttributes} to="/notes">Tickets</Link>
+      <div className={linkClassAttributes}>
+        <a aria-disabled="true" onClick={(e) => handleLogout(e)}><u>Log out</u></a>
+      </div>
     </div>
   );
 }
