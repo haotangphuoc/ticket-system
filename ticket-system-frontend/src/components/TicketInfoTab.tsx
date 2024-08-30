@@ -1,14 +1,17 @@
 interface TicketDashboardProps {
-  handleAddTicket: () => void
+  handleAddTicket?: () => void,
+  isIncomingTickets: boolean
 }
 
-const TicketInfoTab = ({ handleAddTicket }: TicketDashboardProps): JSX.Element => {
+const TicketInfoTab = ({ handleAddTicket, isIncomingTickets }: TicketDashboardProps): JSX.Element => {
   return (
-    <div className="container d-flex flex-column vh-100">
-      <div className="m-4 btn btn-outline-primary mx-2" onClick={handleAddTicket}>+ Add ticket</div>
-      <div className="my-4 fs-5 fw-bold">All ticket</div>
-      <a className="text-dark" href="">Ticket to handle </a>
-      <a className="text-dark" href="">My open ticket</a>
+    <div className={`container d-flex flex-column ps-4 ${isIncomingTickets && "justify-content-center"} vh-100`}>
+      {/* Only show add ticket button for ticket manage page */}
+      {!isIncomingTickets && (
+        <div className="m-4 btn btn-outline-primary mx-2" onClick={handleAddTicket}>+ Add ticket</div>
+      )}
+      {/* Only show ticket to handle option for ticket inbox page */}
+      
       
       <div className="mb-4 mt-5 fs-5 fw-bold">Statuses</div>
       <a className="text-dark" href="">Open</a>

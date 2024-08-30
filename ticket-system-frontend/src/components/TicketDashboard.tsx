@@ -1,10 +1,13 @@
 import { Link } from "react-router-dom";
 import "../css/TicketDashboard.css";
-import { useContext } from "react";
-import { Context } from "../utils/Context";
+import { Ticket } from "../../../interfaces/ticketInterface";
 
-const TicketDashboard = () : JSX.Element => {
-  const { tickets } = useContext(Context);
+interface TicketDashboardProps {
+  tickets: Ticket[],
+  label: string
+}
+
+const TicketDashboard = ({ tickets, label }: TicketDashboardProps) : JSX.Element => {
   const today = new Date();
 
   const isOverdue = (endDate: string): boolean => {
@@ -23,7 +26,7 @@ const TicketDashboard = () : JSX.Element => {
   return(
     <div className="w-100 border border-2">
       <div className="text-center my-4 fs-5 fw-bold">
-        My Inbox
+        {label}
       </div>
       {
         <div className="ticket-dashboard">

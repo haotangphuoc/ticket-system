@@ -18,7 +18,7 @@ const NavBar = (): JSX.Element => {
     <div className="bg-primary p-4 d-flex align-items-end justify-content-between">
       <Link className="nav-link fw-bolder fs-1 text-light" to="/">Ticket 4me</Link>
       <Link className={linkClassAttributes} to="/users">Users</Link>
-      <Link className={linkClassAttributes} to="/notes">Tickets</Link>
+      <Link className={linkClassAttributes} to="/outgoing-tickets">My tickets</Link>
       <div className={linkClassAttributes}>
         <a aria-disabled="true" onClick={(e) => handleLogout(e)}><u>Log out</u></a>
       </div>

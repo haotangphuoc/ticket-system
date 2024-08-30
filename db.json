@@ -220,5 +220,77 @@
         }
       ]
     }
+  ],
+  "users": [
+    {
+      "id": "USER-001",
+      "name": "John Doe",
+      "email": "johndoe@example.com",
+      "role": "CLIENT",
+      "tickets": []
+    },
+    {
+      "id": "USER-002",
+      "name": "Jane Doe",
+      "email": "janedoe@example.com",
+      "role": "CLIENT",
+      "tickets": []
+    },
+    {
+      "id": "USER-003",
+      "name": "Alice Smith",
+      "email": "alice@example.com",
+      "role": "ADMINISTRATOR",
+      "tickets": []
+    },
+    {
+      "id": "USER-004",
+      "name": "Bob Johnson",
+      "email": "bob@example.com",
+      "role": "CLIENT",
+      "tickets": []
+    },
+    {
+      "id": "USER-005",
+      "name": "Sarah Parker",
+      "email": "sarah@example.com",
+      "role": "ADMINISTRATOR",
+      "tickets": []
+    },
+    {
+      "id": "USER-006",
+      "name": "David Brown",
+      "email": "david@example.com",
+      "role": "CLIENT",
+      "tickets": []
+    },
+    {
+      "id": "USER-007",
+      "name": "Michael Clark",
+      "email": "michael@example.com",
+      "role": "ADMINISTRATOR",
+      "tickets": []
+    },
+    {
+      "id": "USER-008",
+      "name": "Emily White",
+      "email": "emily@example.com",
+      "role": "CLIENT",
+      "tickets": []
+    },
+    {
+      "id": "USER-009",
+      "name": "Chris Martin",
+      "email": "chris@example.com",
+      "role": "CLIENT",
+      "tickets": []
+    },
+    {
+      "id": "USER-010",
+      "name": "Sophia Lee",
+      "email": "sophia@example.com",
+      "role": "ADMINISTRATOR",
+      "tickets": []
+    }
   ]  
 }

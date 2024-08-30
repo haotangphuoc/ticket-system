@@ -3,7 +3,7 @@ import { useState } from 'react';
 import TicketEditForm from './TicketEditForm';
 
 interface TicketDetailsPageProps {
-  ticket: Ticket | null
+  ticket: Ticket | null | undefined
 }
 
 interface TicketDetailsProps {
@@ -13,7 +13,7 @@ interface TicketDetailsProps {
 const TicketDetailsPage = ({ ticket }: TicketDetailsPageProps): JSX.Element => {
   return(
     <div>
-      {ticket !== null 
+      {ticket 
         ? <TicketDetails ticket={ticket}/> 
         : <h1>UNABLE TO FIND TICKET</h1>}
     </div>

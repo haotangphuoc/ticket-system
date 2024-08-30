@@ -33,7 +33,7 @@ const UserDashboard = (): JSX.Element => {
         <tbody>
           {
             users.map(user => 
-              <tr>
+              <tr key={user.id}>
                 <td >{user.name}</td>
                 <td className="text-secondary">{user.email}</td>
                 <td className="text-lowercase text-secondary">{user.role}</td>

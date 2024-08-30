@@ -1,10 +1,12 @@
-import NavBar from "./NavBar";
 import { Routes, Route, useMatch } from 'react-router-dom'
-import TicketDetailsPage from "./TicketDetailsPage";
-import TicketManagePage from "./TicketManagePage";
-import UserManagePage from "./UserManagePage";
 import { useContext } from "react";
 import { Context } from "../utils/Context";
+
+import NavBar from "./NavBar";
+import TicketDetailsPage from "./TicketDetailsPage";
+import UserManagePage from "./UserManagePage";
+import TicketIncomingPage from './TicketIncomingPage';
+import TicketOutgoingPage from './TicketOutgoingPage';
 
 const HomePage = () : JSX.Element => {
   const { tickets } = useContext(Context);
@@ -14,14 +16,14 @@ const HomePage = () : JSX.Element => {
     : null
 
   return (
-    <div className="">
-        <NavBar/>
-        <Routes>
-          <Route path="/notes" element={<TicketDetailsPage ticket={ticket}/>} />
-          <Route path="/users" element={<UserManagePage/>} />
-          <Route path="/" element={<TicketManagePage/>} />
-          <Route path="/tickets/:id" element={<TicketDetailsPage ticket={ticket}/>}/>
-        </Routes>
+    <div>
+      <NavBar/>
+      <Routes>
+      <Route path="/" element={<TicketIncomingPage/>} />
+        <Route path="/outgoing-tickets" element={<TicketOutgoingPage/>} />
+        <Route path="/users" element={<UserManagePage/>} />
+        <Route path="/tickets/:id" element={<TicketDetailsPage ticket={ticket}/>}/>
+      </Routes>
     </div>
   )
 }
