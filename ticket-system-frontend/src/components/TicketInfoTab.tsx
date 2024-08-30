@@ -12,7 +12,6 @@ const TicketInfoTab = ({ handleAddTicket, isIncomingTickets }: TicketDashboardPr
       )}
       {/* Only show ticket to handle option for ticket inbox page */}
       
-      
       <div className="mb-4 mt-5 fs-5 fw-bold">Statuses</div>
       <a className="text-dark" href="">Open</a>
       <a className="text-dark" href="">In progress</a>

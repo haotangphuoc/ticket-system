@@ -7,8 +7,13 @@ import TicketDetailsPage from "./TicketDetailsPage";
 import UserManagePage from "./UserManagePage";
 import TicketIncomingPage from './TicketIncomingPage';
 import TicketOutgoingPage from './TicketOutgoingPage';
+import { UserRole } from '../../../interfaces/userInterface';
+
 
 const HomePage = () : JSX.Element => {
+  const role: UserRole = "CLIENT";
+  const isClientView = role === "CLIENT";
+
   const { tickets } = useContext(Context);
   const match = useMatch("/tickets/:id");
   const ticket = match 
@@ -17,13 +22,20 @@ const HomePage = () : JSX.Element => {
 
   return (
     <div>
-      <NavBar/>
-      <Routes>
-      <Route path="/" element={<TicketIncomingPage/>} />
-        <Route path="/outgoing-tickets" element={<TicketOutgoingPage/>} />
-        <Route path="/users" element={<UserManagePage/>} />
-        <Route path="/tickets/:id" element={<TicketDetailsPage ticket={ticket}/>}/>
-      </Routes>
+      <NavBar isClientView={isClientView}/>
+      {
+        isClientView 
+          ? <Routes>
+              <Route path="/" element={<TicketOutgoingPage/>} />
+              <Route path="/tickets/:id" element={<TicketDetailsPage ticket={ticket}/>}/>
+            </Routes>
+          : <Routes>
+              <Route path="/" element={<TicketIncomingPage/>} />
+                <Route path="/outgoing-tickets" element={<TicketOutgoingPage/>} />
+                <Route path="/users" element={<UserManagePage/>} />
+                <Route path="/tickets/:id" element={<TicketDetailsPage ticket={ticket}/>}/>
+            </Routes>
+      }
     </div>
   )
 }
