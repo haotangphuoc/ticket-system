@@ -1,8 +1,8 @@
 import { Ticket } from '../../../interfaces/ticketInterface'
 import { useState } from 'react';
 import TicketEditForm from './TicketEditForm';
-import { UserRole } from '../../../interfaces/userInterface';
 import { useNavigate } from 'react-router-dom';
+import { useUserRole } from '../utils/customHooks';
 
 interface TicketDetailsPageProps {
   ticket: Ticket | null | undefined
@@ -23,8 +23,7 @@ const TicketDetailsPage = ({ ticket }: TicketDetailsPageProps): JSX.Element => {
 }
 
 const TicketDetails = ({ ticket }: TicketDetailsProps): JSX.Element => {
-  const role:UserRole = "ADMINISTRATOR";
-  const isClientView = role === "CLIENT";
+  const userRole = useUserRole();
 
   const [showForm, setShowForm] = useState(false);
   const navigate = useNavigate();
@@ -42,7 +41,7 @@ const TicketDetails = ({ ticket }: TicketDetailsProps): JSX.Element => {
 
       <div className={`container m-4 ${showForm ? "client-dashboard-overlay" : ""}`}>
         <div className="my-4">
-          {!isClientView && <button className="btn btn-primary me-2" onClick={handleEditTicket}>Edit Ticket</button>}
+          {(userRole === "ADMINISTRATOR") && <button className="btn btn-primary me-2" onClick={handleEditTicket}>Edit Ticket</button>}
           <button
             type="button"
             className="btn btn-secondary"

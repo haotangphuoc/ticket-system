@@ -1,12 +1,10 @@
 import TicketInfoTab from "./TicketInfoTab";
 import TicketDashboard from "./TicketDashboard";
-import { useContext, useState } from "react";
 import TicketAddForm from "./TicketAddForm";
-import { Context } from "../utils/Context";
+import { useState } from "react";
 
 const TicketOutgoingPage = (): JSX.Element => {
   const [showForm, setShowForm] = useState(false);
-  const { tickets } = useContext(Context);
 
   const handleAddTicket = () => {
     setShowForm(!showForm);
@@ -17,10 +15,10 @@ const TicketOutgoingPage = (): JSX.Element => {
       {showForm && <TicketAddForm handleAddTicket={handleAddTicket}/>}
       <div className={`row d-flex justify-content-between ${showForm ? "client-dashboard-overlay" : ""}`}>
         <div className="col-3">
-          <TicketInfoTab handleAddTicket={handleAddTicket} isIncomingTickets={false}/>
+          <TicketInfoTab handleAddTicket={handleAddTicket} infoTabType="OUTGOING"/>
         </div>
         <div className="col-9">
-          <TicketDashboard tickets={tickets} label="My Tickets"/>
+          <TicketDashboard infoTabType="OUTGOING"/>
         </div>
       </div> 
     </div>

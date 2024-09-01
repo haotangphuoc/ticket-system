@@ -219,6 +219,50 @@
           "comments": "Debugging the issue."
         }
       ]
+    },
+    {
+      "id": "78282",
+      "sender": "sophia@example.com",
+      "status": "OPEN",
+      "activities": [],
+      "startDate": "2024-09-01",
+      "title": "Hao bien",
+      "description": "Cai lon is bussy",
+      "receiver": "tangphuoc.hao21@gmail.com",
+      "endDate": "2024-10-12"
+    },
+    {
+      "id": "26705",
+      "sender": "sophia@example.com",
+      "status": "OPEN",
+      "activities": [],
+      "startDate": "2024-09-01",
+      "title": "Hao bien",
+      "description": "Cai lon is bussy",
+      "receiver": "tangphuoc.hao21@gmail.com",
+      "endDate": "2024-10-12"
+    },
+    {
+      "id": "1728",
+      "sender": "sophia@example.com",
+      "status": "OPEN",
+      "activities": [],
+      "startDate": "2024-09-01",
+      "title": "HAO BIEN",
+      "description": "Noi gi vay troi oi con di nay",
+      "receiver": "tangphuoc.hao21@gmail.com",
+      "endDate": "2024-10-12"
+    },
+    {
+      "id": "79201",
+      "sender": "sophia@example.com",
+      "status": "OPEN",
+      "activities": [],
+      "startDate": "2024-09-01",
+      "title": "Hao Bien",
+      "description": "Hao bein c",
+      "receiver": "tangphuoc.hao21@gmail.com",
+      "endDate": "2024-10-12"
     }
   ],
   "users": [
@@ -284,13 +328,13 @@
       "email": "chris@example.com",
       "role": "CLIENT",
       "tickets": []
-    },
-    {
-      "id": "USER-010",
-      "name": "Sophia Lee",
-      "email": "sophia@example.com",
-      "role": "ADMINISTRATOR",
-      "tickets": []
     }
-  ]  
+  ],
+  "currentUser": {
+    "id": "USER-010",
+    "name": "Sophia Lee",
+    "email": "sophia@example.com",
+    "role": "ADMINISTRATOR",
+    "tickets": []
+  }
 }

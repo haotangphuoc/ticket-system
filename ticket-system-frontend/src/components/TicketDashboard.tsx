@@ -1,21 +1,21 @@
 import { Link } from "react-router-dom";
 import "../css/TicketDashboard.css";
-import { Ticket } from "../../../interfaces/ticketInterface";
+import { useTickets } from "../utils/customHooks";
 
 interface TicketDashboardProps {
-  tickets: Ticket[],
-  label: string
+  infoTabType : "INCOMING" | "OUTGOING"
 }
 
-const TicketDashboard = ({ tickets, label }: TicketDashboardProps) : JSX.Element => {
+const TicketDashboard = ({ infoTabType }: TicketDashboardProps) : JSX.Element => {
   const today = new Date();
+  const tickets = useTickets();
 
   const isOverdue = (endDate: string): boolean => {
     const endDateObj = new Date(endDate);
     return endDateObj > today;
   }
   const endDateContainerTextColor = (endDate: string): string => {
-    return isOverdue(endDate) ? 'text-danger': 'text-success'
+    return isOverdue(endDate) ? 'text-success': 'text-danger'
   }
   const convertDayFormat = (date:string): string => {
     const dateObject = new Date(date);
@@ -25,8 +25,8 @@ const TicketDashboard = ({ tickets, label }: TicketDashboardProps) : JSX.Element
   
   return(
     <div className="w-100 border border-2">
-      <div className="text-center my-4 fs-5 fw-bold">
-        {label}
+      <div className="text-center my-4 fs-3 fw-bold">
+        {(infoTabType === "INCOMING") ? "My Inbox" : "My Tickets"}
       </div>
       {
         <div className="ticket-dashboard">
@@ -35,8 +35,8 @@ const TicketDashboard = ({ tickets, label }: TicketDashboardProps) : JSX.Element
               <Link to={`/tickets/${ticket.id}`} className="text-decoration-none">
                 <div className="container border p-2 d-flex flex-row align-items-center justify-content-between custom-hover" onClick={() => console.log("helo")}>
                   <div className="ticket-general-info">
-                    <div className="fs-5 fw-bold">{ticket.sender}</div>
-                    <div className="fs-7 fw-bold">{ticket.title}</div>
+                    <div className="fs-5 fw-bold">{ticket.title}</div>
+                    <div className="fs-7 fw-bold text-secondary">{ticket.sender}</div>
                     <div className="fw-light ticket-description text-secondary">{ticket.description}</div>
                   </div>
                   <div className="ticket-status d-flex flex-column justify-content-end">
