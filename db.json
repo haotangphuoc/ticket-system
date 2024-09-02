@@ -328,6 +328,18 @@
       "email": "chris@example.com",
       "role": "CLIENT",
       "tickets": []
+    },
+    {
+      "id": "fa65",
+      "name": "Hao Tang",
+      "email": "tangphuoc.hao21@gmail.com",
+      "role": "ADMINISTRATOR"
+    },
+    {
+      "id": "7c43",
+      "name": "Hao Tang",
+      "email": "tangphuoc.hao21@gmail.com",
+      "role": "CLIENT"
     }
   ],
   "currentUser": {

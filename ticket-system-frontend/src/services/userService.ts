@@ -16,4 +16,17 @@ const getAllUsers = async () : Promise<User[] | Error> => {
   }
 }
 
-export default { getAllUsers }
+const createUser = async (userDate: Omit<User, 'id'| 'tickets' | 'password'>): Promise<User | Error> => {
+  try {
+    const res = await axios.post(baseUrl, userDate);
+    return res.data
+  } catch(error) {
+    if (axios.isAxiosError(error)) {
+      return new Error(error.message); 
+    } else {
+      return new Error('An unknown error occurred');
+    }
+  }
+}
+
+export default { getAllUsers, createUser }

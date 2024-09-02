@@ -33,7 +33,7 @@ const TicketDashboard = ({ infoTabType }: TicketDashboardProps) : JSX.Element =>
           {tickets.map(ticket => (
             <div key={ticket.id}>
               <Link to={`/tickets/${ticket.id}`} className="text-decoration-none">
-                <div className="container border p-2 d-flex flex-row align-items-center justify-content-between custom-hover" onClick={() => console.log("helo")}>
+                <div className="container border p-2 d-flex flex-row align-items-center justify-content-between custom-hover">
                   <div className="ticket-general-info">
                     <div className="fs-5 fw-bold">{ticket.title}</div>
                     <div className="fs-7 fw-bold text-secondary">{ticket.sender}</div>
