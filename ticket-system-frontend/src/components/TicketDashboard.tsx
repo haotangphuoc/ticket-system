@@ -36,7 +36,7 @@ const TicketDashboard = ({ infoTabType }: TicketDashboardProps) : JSX.Element =>
                 <div className="container border p-2 d-flex flex-row align-items-center justify-content-between custom-hover">
                   <div className="ticket-general-info">
                     <div className="fs-5 fw-bold">{ticket.title}</div>
-                    <div className="fs-7 fw-bold text-secondary">{ticket.sender}</div>
+                    <div className="fs-7 fw-bold text-secondary">{ticket.senderId}</div>
                     <div className="fw-light ticket-description text-secondary">{ticket.description}</div>
                   </div>
                   <div className="ticket-status d-flex flex-column justify-content-end">

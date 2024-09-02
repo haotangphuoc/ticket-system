@@ -58,7 +58,7 @@ const TicketDetails = ({ ticket }: TicketDetailsProps): JSX.Element => {
             </div>
           </div>
           <br />
-          <p className="text-secondary mb-1">Requested by: <b>{ticket.sender}</b></p>
+          <p className="text-secondary mb-1">Requested by: <b>{ticket.senderId}</b></p>
           <p className="text-secondary mb-1">On day: <b>{ticket.startDate}</b></p>
           <p className="text-secondary">Deadline: <b>{ticket.endDate}</b></p>
         </div>
@@ -69,7 +69,7 @@ const TicketDetails = ({ ticket }: TicketDetailsProps): JSX.Element => {
           <p className='pt-3'>Status:</p>
           {(ticket.activities).map(activity  => 
             <div className='border-top py-4 ps-5' key={activity.id}>
-              <p><b>{ticket.receiver} changed status to  {activity.status}</b></p>
+              <p><b>{ticket.receiverId} changed status to  {activity.status}</b></p>
               <p className="text-secondary mb-1"><b>Comment:</b> {activity.comments}</p>
             </div>
           )}

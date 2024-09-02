@@ -16,14 +16,14 @@ const getAllTickets = async () : Promise<Ticket[] | Error> => {
   }
 }
 
-const createTicket = async (ticketData: Omit<Ticket, 'id' | 'sender' | 'status' | 'startDate' | 'activities'>) => {
+const createTicket = async (ticketData: Omit<Ticket, 'id' | 'senderId' | 'status' | 'startDate' | 'activities'>) => {
   try {
     const newTicket: Ticket = {
       id: String(Math.floor(Math.random() * 100000)),
-      sender: "sophia@example.com", // fetch current user and add it here
+      senderId: "sophia@example.com", 
       status: "OPEN",
       activities: [],
-      startDate: new Date().toISOString().split('T')[0],
+      startDate: new Date().toISOString().split('T')[0],  // Implement this in the back end
       ...ticketData
     };
     const res = await axios.post(baseUrl, newTicket);

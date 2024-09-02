@@ -1,5 +1,3 @@
-import { Ticket } from "./ticketInterface"
-
 export type UserRole = "CLIENT" | "ADMINISTRATOR";
 
 export interface User {
@@ -7,7 +5,8 @@ export interface User {
   name: string,
   password: string,
   email: string,
-  tickets: Ticket[],
+  organizationId: string,
+  ticketIds: string[],
   role: UserRole
 }
 

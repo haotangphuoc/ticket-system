@@ -16,9 +16,16 @@ const getAllUsers = async () : Promise<User[] | Error> => {
   }
 }
 
-const createUser = async (userDate: Omit<User, 'id'| 'tickets' | 'password'>): Promise<User | Error> => {
+const createUser = async (userDate: Omit<User, 'id'| 'organizationId' | 'ticketIds' | 'password'>): Promise<User | Error> => {
   try {
-    const res = await axios.post(baseUrl, userDate);
+    const newUser = {
+      id: String(Math.floor(Math.random() * 100000)),
+      organizationId: "Add organization id here", // Could be implemented in the backend
+      ticketIds: [],
+      password: '',
+      ...userDate
+    }
+    const res = await axios.post(baseUrl, newUser);
     return res.data
   } catch(error) {
     if (axios.isAxiosError(error)) {

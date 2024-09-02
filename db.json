@@ -221,17 +221,6 @@
       ]
     },
     {
-      "id": "78282",
-      "sender": "sophia@example.com",
-      "status": "OPEN",
-      "activities": [],
-      "startDate": "2024-09-01",
-      "title": "Hao bien",
-      "description": "Cai lon is bussy",
-      "receiver": "tangphuoc.hao21@gmail.com",
-      "endDate": "2024-10-12"
-    },
-    {
       "id": "26705",
       "sender": "sophia@example.com",
       "status": "OPEN",
@@ -262,6 +251,17 @@
       "title": "Hao Bien",
       "description": "Hao bein c",
       "receiver": "tangphuoc.hao21@gmail.com",
+      "endDate": "2024-10-12"
+    },
+    {
+      "id": "72601",
+      "senderId": "sophia@example.com",
+      "status": "OPEN",
+      "activities": [],
+      "startDate": "2024-09-02",
+      "title": "Ticket 10",
+      "description": "Hao bien ne mng oii",
+      "receiverId": "tangphuoc.hao21@gmail.com",
       "endDate": "2024-10-12"
     }
   ],
@@ -340,6 +340,15 @@
       "name": "Hao Tang",
       "email": "tangphuoc.hao21@gmail.com",
       "role": "CLIENT"
+    },
+    {
+      "id": "70644",
+      "organizationId": "Add organization id here",
+      "ticketIds": [],
+      "password": "",
+      "name": "Di lon",
+      "email": "tangphuoc.hao21@gmail.com",
+      "role": "ADMINISTRATOR"
     }
   ],
   "currentUser": {

@@ -27,7 +27,7 @@ const TicketAddForm = ({ handleAddTicket }: TicketAddFormProps): JSX.Element => 
     const ticketData = {
       title: formData.title,
       description: formData.description,
-      receiver: formData.email,
+      receiverId: formData.email,
       endDate: formData.deadline
     };
     
