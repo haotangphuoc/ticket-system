@@ -10,3 +10,8 @@ export interface User {
   role: UserRole
 }
 
+export interface UserPOSTParams {
+  name: string,
+  email: string,
+  role: UserRole
+}

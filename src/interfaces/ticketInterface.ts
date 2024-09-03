@@ -17,3 +17,10 @@ export interface Ticket {
   endDate: string,
   activities: TicketActivity[]
 }
+
+export interface TicketPOSTParams {
+  title: string,
+  description: string,
+  receiverId: string,
+  endDate: string
+}
