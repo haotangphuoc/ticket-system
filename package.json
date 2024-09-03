@@ -2,11 +2,13 @@
   "name": "ticket-system",
   "version": "1.0.0",
   "description": "This is a ticket management system project!",
-  "main": "index.js",
+  "main": "build/src/index.js",
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "db": "json-server --watch db.json --port 3000"
+    "db": "json-server --watch db.json --port 3000",
+    "dev": "tsx src/index.ts",
+    "build": "tsc"
   },
   "keywords": [],
   "author": "",
@@ -19,10 +21,19 @@
     "eslint-plugin-prettier": "^5.2.1",
     "eslint-plugin-react": "^7.35.0",
     "globals": "^15.9.0",
+    "nodemon": "^3.1.4",
+    "ts-node": "^10.9.2",
     "typescript": "^5.5.4",
     "typescript-eslint": "^8.3.0"
   },
   "dependencies": {
-    "react-router-dom": "^6.26.1"
+    "@types/express": "^4.17.21",
+    "@types/mongodb": "^4.0.6",
+    "@types/mongoose": "^5.11.96",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "mongoose": "^8.6.0",
+    "react-router-dom": "^6.26.1",
+    "tsx": "^4.19.0"
   }
 }

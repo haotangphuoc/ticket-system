@@ -1,8 +1,8 @@
 import { createContext, useEffect, useState } from "react";
 import ticketService from "../services/ticketService";
 import { ReactNode } from "react";
-import { Ticket } from "../../../interfaces/ticketInterface";
-import { UserRole } from "../../../interfaces/userInterface";
+import { Ticket } from "../../../src/interfaces/ticketInterface";
+import { UserRole } from "../../../src/interfaces/userInterface";
 
 interface ContextType {
   tickets: Ticket[],

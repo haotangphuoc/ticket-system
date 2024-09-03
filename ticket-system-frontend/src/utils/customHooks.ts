@@ -1,7 +1,7 @@
 import { useContext } from "react";
-import { UserRole } from "../../../interfaces/userInterface";
+import { UserRole } from "../../../src/interfaces/userInterface";
 import { Context } from "./Context";
-import { Ticket } from "../../../interfaces/ticketInterface";
+import { Ticket } from "../../../src/interfaces/ticketInterface";
 
 export const useUserRole = (): UserRole => {
   const { userRole } = useContext(Context);

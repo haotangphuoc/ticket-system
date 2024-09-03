@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import userService from '../services/userService'
-import { User } from "../../../interfaces/userInterface";
+import { User } from "../../../src/interfaces/userInterface";
 
 const UserDashboard = (): JSX.Element => {
   const [users, setUsers] = useState<User[]>([])
