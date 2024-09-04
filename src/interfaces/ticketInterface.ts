@@ -3,7 +3,7 @@ type TicketStatus = "OPEN" | "IN PROGRESS" | "RESOLVED" | "ON HOLD" | "CANCELLED
 export interface TicketActivity {
   id: string,
   status: TicketStatus,
-  comments?: string
+  comment?: string
 }
 
 export interface Ticket {
@@ -13,8 +13,8 @@ export interface Ticket {
   senderId: string,
   receiverId: string,
   status: TicketStatus,
-  startDate: string,
-  endDate: string,
+  startDate: string,  // Format: YYYY-MM-DD
+  endDate: string,    // Format: YYYY-MM-DD
   activities: TicketActivity[]
 }
 

@@ -4,7 +4,7 @@ export type TicketStatus = "OPEN" | "IN PROGRESS" | "RESOLVED" | "ON HOLD" | "CA
 
 export interface ITicketActivity extends Document {
   status: TicketStatus;
-  comments?: string;
+  comment?: string;
 }
 
 export interface ITicket extends Document {
@@ -20,7 +20,7 @@ export interface ITicket extends Document {
 
 const ticketActivitySchema: Schema = new Schema({
   status: { type: String, enum: ["OPEN", "IN PROGRESS", "RESOLVED", "ON HOLD", "CANCELLED"], required: true },
-  comments: { type: String }
+  comment: { type: String }
 });
 
 const ticketSchema: Schema = new Schema({
@@ -34,4 +34,7 @@ const ticketSchema: Schema = new Schema({
   activities: [ticketActivitySchema]
 });
 
+
+
 export const Ticket = mongoose.model<ITicket>('Ticket', ticketSchema);
+export const TicketActivity = mongoose.model<ITicketActivity>('TicketActivity', ticketActivitySchema);
