@@ -1,10 +1,11 @@
 import mongoose, { Schema, Document } from 'mongoose';
+import { Ticket } from '../interfaces/ticketInterface';
 
 export type UserRole = "CLIENT" | "ADMINISTRATOR";
 
 export interface IUser extends Document {
   name: string;
-  password: string;
+  passwordHash: string;
   email: string;
   organizationId: mongoose.Types.ObjectId;
   incomingTicketIds?: mongoose.Types.ObjectId[]; // Only for Admins
@@ -12,9 +13,9 @@ export interface IUser extends Document {
   outgoingTicketIds: mongoose.Types.ObjectId[]; 
 }
 
-const UserSchema: Schema<IUser> = new Schema({
+const userSchema: Schema<IUser> = new Schema({
   name: { type: String, required: true },
-  password: { type: String, required: true },
+  passwordHash: { type: String, required: true },
   email: { type: String, required: true, unique: true },
   organizationId: { type: mongoose.Schema.Types.ObjectId, ref: 'Organization' },
   incomingTicketIds: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Ticket' }],
@@ -23,11 +24,24 @@ const UserSchema: Schema<IUser> = new Schema({
 });
 
 // Make sure 'outgoingTicketIds' is only present for Administrators
-UserSchema.pre('save', function (next) {
+userSchema.pre('save', function (next) {
   if (this.role === 'CLIENT') {
     this.incomingTicketIds = undefined;
   }
   next();
 });
 
-export const User = mongoose.model<IUser>('User', UserSchema);
+userSchema.set('toJSON', {
+  transform: (document, returnedObject) => {
+    returnedObject.id = returnedObject._id.toString();
+    delete returnedObject._id;
+    delete returnedObject.__v;
+    delete returnedObject.passwordHash;
+    delete returnedObject.outgoingTicketIds;
+    if(returnedObject.incomingTicketIds) {
+      delete returnedObject.incomingTicketIds;
+    }
+  }
+})
+
+export const User = mongoose.model<IUser>('User', userSchema);

@@ -6,15 +6,8 @@ import mongoose from 'mongoose';
 const router = express.Router();
 
 
-router.get('/', async (req: Request, res: Response, next: NextFunction) => {
-  try {
-    const tickets = await Ticket.find();
-    res.json(tickets);
-  } catch (error) {
-    next(error);
-  }
-});
 
+// Get ticket based on Id
 router.get('/:id', async (req: Request, res: Response, next: NextFunction) => {
   try {
     const ticket = await Ticket.findById(req.params.id);
@@ -25,6 +18,18 @@ router.get('/:id', async (req: Request, res: Response, next: NextFunction) => {
 });
 
 
+
+// Create a new ticket and add the ticket Id to sender and receiver's ticketIds field
+
+// POST JSON format
+// {
+//   "title": "string",
+//   "description": "string",
+//   "senderId": "MongoId",
+//   "receiverId": "MongoId",
+//   "startDate": "Date",
+//   "endDate": "Date"
+// }
 router.post('/', async (req: Request, res: Response, next: NextFunction) => {
   const session = await mongoose.startSession();
   session.startTransaction();
@@ -72,11 +77,18 @@ router.post('/', async (req: Request, res: Response, next: NextFunction) => {
   }
 });
 
-router.post('/:id/activity', async (req: Request, res: Response, next: NextFunction) => {
+
+
+// Add new ticket activity to ticket's activityIds field
+// POST JSON format
+// {
+//   "status": "TicketStatus",
+//   "comments"?: "string"
+// }
+router.post('/:id/activities', async (req: Request, res: Response, next: NextFunction) => {
   try {
     const { status, comment } = req.body;
-    const activityData = { status, comment };
-    const activity = new TicketActivity(activityData); 
+    const activity = new TicketActivity({status, comment}); 
     const ticket = await Ticket.findById(req.params.id);
 
     // Push the new activity to ticket's activities field and change ticket status to activity
@@ -93,6 +105,18 @@ router.post('/:id/activity', async (req: Request, res: Response, next: NextFunct
   }
 });
 
+
+
+// Edit fields of ticket
+// PATCH JSON format
+// {
+//   "title"?: "string",
+//   "description"?: "string",
+//   "senderId"?: "MongoId",
+//   "receiverId"?: "MongoId",
+//   "startDate"?: "Date",
+//   "endDate"?: "Date"
+// }
 router.patch('/:id', async (req: Request, res: Response, next: NextFunction) => {
   try {
     // Check for unknown field in the ticket PATCH request
@@ -117,6 +141,9 @@ router.patch('/:id', async (req: Request, res: Response, next: NextFunction) => 
   }
 });
 
+
+
+// Delete ticket and delete its Id from sender and receiver's ticketIds field
 router.delete('/:id', async (req: Request, res: Response, next: NextFunction) => {
   const session = await mongoose.startSession();
   session.startTransaction();

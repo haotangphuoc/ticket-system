@@ -34,7 +34,15 @@ const ticketSchema: Schema = new Schema({
   activities: [ticketActivitySchema]
 });
 
-
+ticketSchema.set('toJSON', {
+  transform: (document, returnedObject) => {
+    returnedObject.id = returnedObject._id.toString();
+    returnedObject.startDate = returnedObject.startDate.toISOString().split('T')[0];
+    returnedObject.endDate = returnedObject.endDate.toISOString().split('T')[0];
+    delete returnedObject._id;
+    delete returnedObject.__v;
+  }
+})
 
 export const Ticket = mongoose.model<ITicket>('Ticket', ticketSchema);
 export const TicketActivity = mongoose.model<ITicketActivity>('TicketActivity', ticketActivitySchema);
