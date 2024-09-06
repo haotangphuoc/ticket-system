@@ -15,8 +15,8 @@ authenticationRoutes.post('/register', async (req: Request, res: Response, next:
 
     const { email, password } = req.body;
     const user = await User.findOne({ email: email });
-    if (!User) {
-      res.status(400).send('User with provided email does not exist in the database!');
+    if (!user) {
+      return res.status(400).json({mesage: 'Email does not exist in DB, require permission from an administrator!'});
     }
 
     const updatedUser = await User.findOneAndUpdate(
@@ -25,7 +25,7 @@ authenticationRoutes.post('/register', async (req: Request, res: Response, next:
       { new: true, runValidators: true } 
     );
 
-    res.status(201).json(updatedUser);
+    return res.status(201).json(updatedUser);
   } catch(error) {
     next(error);
   }
@@ -36,23 +36,28 @@ authenticationRoutes.post('/login', async (req: Request, res: Response, next: Ne
   try {
     const { email, password } = req.body;
     const user = await User.findOne({ email });
+    if(!user) {
+      return res.status(400).json({message: 'Email does not exist in DB, require permission from an administrator!'});
+    }
+    if(user.passwordHash === '') {
+      return res.status(400).json({mesage: 'User is not yet registered!'});
+    }
     const passwordCorrect = user === null
       ? false
       : await bcrypt.compare(password, user.passwordHash);
-    if(!(user && passwordCorrect)) {
-      res.status(401).send('Invalid userame or password');
+    if(!passwordCorrect) {
+      return res.status(401).json({mesage: 'Invalid userame or password'});
     }
-    else {
-      const webTokenUserInfo = {
-        email: user.email,
-        id: user.id,
-      }
-      if(!process.env.SECRET) {
-        throw new Error('env.SECRET does not exists!');
-      }
-      const token = jwt.sign(webTokenUserInfo, process.env.SECRET);
-      res.status(200).json({token, user});
+    const webTokenUserInfo = {
+      email: user.email,
+      id: user.id,
     }
+    if(!process.env.SECRET) {
+      return res.status(500).json({message: 'env.SECRET does not exists!'});
+    }
+    const token = jwt.sign(webTokenUserInfo, process.env.SECRET);
+    res.status(200).json({token, user});
+    
   } catch(error) {
     next(error);
   }
