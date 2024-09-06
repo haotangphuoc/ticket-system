@@ -10,7 +10,7 @@ router.get('/:id', async (req: Request, res: Response, next: NextFunction) => {
   try {
     const organization = await Organization.findById(req.params.id);
     if(!organization) {
-      throw new Error('Organization not found!');
+      return res.status(404).json({message: 'Organization not found!'});
     }
     res.json(organization);
   } catch (error) {
@@ -27,7 +27,7 @@ router.get('/:id/users', async (req: Request, res: Response, next: NextFunction)
         select: "name email role"
       });
     if(!organization) {
-      throw new Error('Organization not found!');
+      return res.status(404).json({message: 'Organization not found!'});
     }
 
     // @ts-ignore
@@ -49,7 +49,7 @@ router.get('/:id/users', async (req: Request, res: Response, next: NextFunction)
 router.post('/', async (req: Request, res: Response, next: NextFunction) => {
   try {
     if(!tokenIsValid(req)) {
-      res.status(400).send("Token is invalid!");
+      return res.status(400).json({message: "Token is invalid!"});
     }
     const newOrganization = new Organization(req.body);
     await newOrganization.save();

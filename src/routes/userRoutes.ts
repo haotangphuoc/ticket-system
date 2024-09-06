@@ -14,9 +14,9 @@ router.get('/:id', async (req: Request, res: Response, next: NextFunction) => {
   try {
     const user = await User.findById(req.params.id);
     if(!user) {
-      throw new Error('User not found!');
+      return res.status(404).json({message: 'User not found!'});
     }
-    res.json(user);
+    return res.status(200).json(user);
   } catch (error) {
     next(error);
   }
@@ -29,10 +29,10 @@ router.get('/:id/incomingTickets', async (req: Request, res: Response, next: Nex
   try {
     const user = await User.findById(req.params.id);
     if(!user) {
-      throw new Error('User not found!');
+      return res.status(404).json({message: 'User not found!'});
     }
     if(user.role != 'ADMINISTRATOR') {
-      throw new Error('User is not and administrator!');
+      return res.status(401).json({message: 'User is not and administrator!'});
     }
     const administrator = await user.populate({
         path: 'incomingTicketIds',
@@ -62,7 +62,7 @@ router.get('/:id/incomingTickets', async (req: Request, res: Response, next: Nex
         };
       });
   
-      res.json(transformedTickets);
+      return res.status(200).json(transformedTickets);
   } catch (error) {
     next(error);
   }
@@ -73,9 +73,10 @@ router.get('/:id/incomingTickets', async (req: Request, res: Response, next: Nex
 // Get the user's outgoing tickets
 router.get('/:id/outgoingTickets', async (req: Request, res: Response, next: NextFunction) => {
   try {
+    
     const user = await User.findById(req.params.id);
     if(!user) {
-      throw new Error('User not found!');
+      return res.status(404).json({message: 'User not found!'});
     }
     const administrator = await user.populate({
         path: 'outgoingTicketIds',
@@ -105,7 +106,7 @@ router.get('/:id/outgoingTickets', async (req: Request, res: Response, next: Nex
         };
       });
 
-      res.json(transformedTickets);
+      return res.status(200).json(transformedTickets);
   } catch (error) {
     next(error);
   }
@@ -120,13 +121,13 @@ router.post('/', async (req: Request, res: Response, next: NextFunction) => {
 
   try {
     if(!tokenIsValid(req)) {
-      res.status(400).send("Token is invalid!");
+      return res.status(400).send("Token is invalid!");
     }
     const { name, email, role, organizationId } = req.body;
     const organization = await Organization.findById(organizationId);
     // Make sure organizaion exists
     if(!organization) {
-      throw new Error("the organizationId is invalid");
+      return res.status(400).json({message: "The organization is not found!"});
     }
 
     // Create a new user
@@ -149,13 +150,13 @@ router.post('/', async (req: Request, res: Response, next: NextFunction) => {
     );
 
     if (!updatedOrganization) {
-      throw new Error("Organization not found.");
+      return res.status(404).json({message: "Organization not found."});
     }
 
     await session.commitTransaction();
     session.endSession();
 
-    res.status(201).json(savedUser);
+    return res.status(201).json(savedUser);
 
   } catch (error) {
     await session.abortTransaction();
@@ -173,22 +174,19 @@ router.delete('/:userId', async (req: Request, res: Response, next: NextFunction
 
   try {
     if(!tokenIsValid(req)) {
-      res.status(400).send("Token is invalid!");
+      return res.status(401).send("Token is invalid!");
     }
     // Make sure userId is available and user exist
     const userId = req.params.userId;
-    if (!userId) {
-      throw new Error("User ID is required.");
-    }
     const user = await User.findById(userId).session(session);
     if (!user) {
-      throw new Error("User not found.");
+      return res.status(404).json({message: "User not found."});
     }
 
     // Make sure organization exists
     const organizationId = user.organizationId;
     if (!organizationId) {
-      throw new Error("User is not associated with any organization.");
+      return res.status(400).json({message: "User is not associated with any organization."});
     }
 
     await User.findByIdAndDelete(userId).session(session);
@@ -206,7 +204,7 @@ router.delete('/:userId', async (req: Request, res: Response, next: NextFunction
     await session.commitTransaction();
     session.endSession();
 
-    res.status(200).json({ message: "User deleted and organization updated successfully." });
+    return res.status(200).json({ message: "User deleted and organization updated successfully." });
 
   } catch (error) {
     await session.abortTransaction();

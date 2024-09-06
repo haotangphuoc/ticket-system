@@ -15,7 +15,7 @@ router.post('/', async (req: Request, res: Response, next: NextFunction) => {
 
   try {
     if(!tokenIsValid(req)) {
-      res.status(400).send("Token is invalid!");
+      return res.status(400).json({message: "Token is invalid!"});
     }
     const { senderId, receiverId } = req.body;
     const newTicket = new Ticket(req.body);
@@ -24,7 +24,7 @@ router.post('/', async (req: Request, res: Response, next: NextFunction) => {
     // Add the ticket to the sender's outgoingTicketIds
     const sender = await User.findById(senderId).session(session);
     if (!sender) {
-      throw new Error(`Sender with ID ${senderId} not found.`);
+      return res.status(404).json({message: `Sender with ID ${senderId} not found.`});
     }
     sender.outgoingTicketIds.push(new mongoose.Types.ObjectId(savedTicket._id as string));
     
@@ -34,7 +34,7 @@ router.post('/', async (req: Request, res: Response, next: NextFunction) => {
     // Add the ticket to the receiver's incomingTicketIds if they are ADMINISTRATOR
     const receiver = await User.findById(receiverId).session(session);
     if (!receiver) {
-      throw new Error(`Receiver with ID ${receiverId} not found.`);
+      return res.status(404).json({message: `Receiver with ID ${receiverId} not found.`});
     }
     if (receiver.role === 'ADMINISTRATOR') {
       if (!receiver.incomingTicketIds) {
@@ -44,13 +44,13 @@ router.post('/', async (req: Request, res: Response, next: NextFunction) => {
       receiver.incomingTicketIds.push(new mongoose.Types.ObjectId(savedTicket._id as string));
       await receiver.save({ session });
     } else {
-      throw new Error(`Receiver with ID ${receiverId} is not an ADMINISTRATOR.`);
+      return res.status(404).json({message: `Receiver with ID ${receiverId} is not an ADMINISTRATOR.`});
     }
 
     await session.commitTransaction();
     session.endSession();
 
-    res.status(201).json(savedTicket);
+    return res.status(201).json(savedTicket);
 
   } catch (error) {
     await session.abortTransaction();
@@ -65,7 +65,7 @@ router.post('/', async (req: Request, res: Response, next: NextFunction) => {
 router.post('/:id/activities', async (req: Request, res: Response, next: NextFunction) => {
   try {
     if(!tokenIsValid(req)) {
-      res.status(400).send("Token is invalid!");
+      return res.status(401).json({message: "Token is invalid!"});
     }
     const { status, comment } = req.body;
     const activity = new TicketActivity({status, comment}); 
@@ -79,7 +79,7 @@ router.post('/:id/activities', async (req: Request, res: Response, next: NextFun
     ticket.status = status;
     await ticket.save();
 
-    res.status(200).json(ticket);
+    return res.status(200).json(ticket);
   } catch (error) {
     next(error);
   }
@@ -91,7 +91,7 @@ router.post('/:id/activities', async (req: Request, res: Response, next: NextFun
 router.patch('/:id', async (req: Request, res: Response, next: NextFunction) => {
   try {
     if(!tokenIsValid(req)) {
-      res.status(400).send("Token is invalid!");
+      return res.status(401).json({message: "Token is invalid!"});
     }
     // Check for unknown field in the ticket PATCH request
     const allowedFields = ['title', 'description', 'receiverId', 'status', 'startDate', 'endDate'];
@@ -124,7 +124,7 @@ router.delete('/:id', async (req: Request, res: Response, next: NextFunction) =>
 
   try {
     if(!tokenIsValid(req)) {
-      res.status(400).send("Token is invalid!");
+      return res.status(401).json({message: "Token is invalid!"});
     }
     // Make sure ticket exists
     const ticket = await Ticket.findById(req.params.id).session(session);
@@ -145,7 +145,7 @@ router.delete('/:id', async (req: Request, res: Response, next: NextFunction) =>
       { session }
     );
     if(!updatedReceiver || !updatedSender) {
-      throw new Error("Cannot update receiver or sender's ticket field")
+      return res.status(500).json({message: "Cannot update receiver or sender's ticket field"})
     }
 
     // Delete the ticket
