@@ -2,6 +2,7 @@ import express, { NextFunction, Request, Response } from 'express';
 import { ITicketActivity, Ticket, TicketActivity } from '../models/ticketModel';
 import { User } from '../models/userModel';
 import mongoose from 'mongoose';
+import { tokenIsValid } from '../helpers/authorizationHelpers';
 
 const router = express.Router();
 
@@ -35,6 +36,9 @@ router.post('/', async (req: Request, res: Response, next: NextFunction) => {
   session.startTransaction();
 
   try {
+    if(!tokenIsValid(req)) {
+      res.status(400).send("Token is invalid!");
+    }
     const { senderId, receiverId } = req.body;
     const newTicket = new Ticket(req.body);
     const savedTicket = await newTicket.save({ session });
@@ -87,6 +91,9 @@ router.post('/', async (req: Request, res: Response, next: NextFunction) => {
 // }
 router.post('/:id/activities', async (req: Request, res: Response, next: NextFunction) => {
   try {
+    if(!tokenIsValid(req)) {
+      res.status(400).send("Token is invalid!");
+    }
     const { status, comment } = req.body;
     const activity = new TicketActivity({status, comment}); 
     const ticket = await Ticket.findById(req.params.id);
@@ -119,6 +126,9 @@ router.post('/:id/activities', async (req: Request, res: Response, next: NextFun
 // }
 router.patch('/:id', async (req: Request, res: Response, next: NextFunction) => {
   try {
+    if(!tokenIsValid(req)) {
+      res.status(400).send("Token is invalid!");
+    }
     // Check for unknown field in the ticket PATCH request
     const allowedFields = ['title', 'description', 'receiverId', 'status', 'startDate', 'endDate'];
     const unknownFields = Object.keys(req.body).filter(field => !allowedFields.includes(field));
@@ -149,6 +159,9 @@ router.delete('/:id', async (req: Request, res: Response, next: NextFunction) =>
   session.startTransaction();
 
   try {
+    if(!tokenIsValid(req)) {
+      res.status(400).send("Token is invalid!");
+    }
     // Make sure ticket exists
     const ticket = await Ticket.findById(req.params.id).session(session);
     if (!ticket) {

@@ -1,6 +1,7 @@
 import express, { Request, Response, NextFunction } from 'express';
 import { Organization } from '../models/organizationModel';
 import { IUser } from '../models/userModel';
+import { tokenIsValid } from '../helpers/authorizationHelpers';
 
 const router = express.Router();
 
@@ -71,6 +72,9 @@ router.get('/:id/users', async (req: Request, res: Response, next: NextFunction)
 // }
 router.post('/', async (req: Request, res: Response, next: NextFunction) => {
   try {
+    if(!tokenIsValid(req)) {
+      res.status(400).send("Token is invalid!");
+    }
     const newOrganization = new Organization(req.body);
     await newOrganization.save();
     res.json(newOrganization);

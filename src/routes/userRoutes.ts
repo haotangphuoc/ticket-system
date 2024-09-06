@@ -3,6 +3,7 @@ import { User } from '../models/userModel';
 import { Organization } from '../models/organizationModel';
 import mongoose from 'mongoose';
 import { ITicket, ITicketActivity } from '../models/ticketModel';
+import { tokenIsValid } from '../helpers/authorizationHelpers';
 
 const router = express.Router();
 
@@ -176,7 +177,6 @@ router.get('/:id/outgoingTickets', async (req: Request, res: Response, next: Nex
 // POST JSON format
 // {
 //   "name": "string",
-//   "passwordHash": "string",
 //   "email": "string",
 //   "organizationId": "mongoId",
 //   "role": "UserRole"
@@ -186,15 +186,19 @@ router.post('/', async (req: Request, res: Response, next: NextFunction) => {
   session.startTransaction();
 
   try {
-    const { name, passwordHash, email, role, organizationId } = req.body;
-    if(!mongoose.isValidObjectId(organizationId)) {
+    if(!tokenIsValid(req)) {
+      res.status(400).send("Token is invalid!");
+    }
+    const { name, email, role, organizationId } = req.body;
+    const organization = await Organization.findById(organizationId);
+    // Make sure organizaion exists
+    if(!organization) {
       throw new Error("the organizationId is invalid");
     }
 
     // Create a new user
     const newUser = new User({
       name,
-      passwordHash,
       email,
       organizationId,
       role,
@@ -235,6 +239,9 @@ router.delete('/:userId', async (req: Request, res: Response, next: NextFunction
   session.startTransaction();
 
   try {
+    if(!tokenIsValid(req)) {
+      res.status(400).send("Token is invalid!");
+    }
     // Make sure userId is available and user exist
     const userId = req.params.userId;
     if (!userId) {

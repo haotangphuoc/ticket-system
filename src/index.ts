@@ -4,7 +4,8 @@ import { connectDB } from './config/db';
 import organizationRoutes from './routes/organizationRoutes';
 import ticketRoutes from './routes/ticketRoutes';
 import userRoutes from './routes/userRoutes';
-import { errorHandler } from './middleware/errorHandler';
+import authenticationRoutes from './routes/authentication'
+import { errorHandler } from './middlewares/errorHandler';
 
 dotenv.config();
 const app = express();
@@ -15,6 +16,7 @@ connectDB();
 app.use('/api/organizations', organizationRoutes);
 app.use('/api/tickets', ticketRoutes);
 app.use('/api/users', userRoutes);
+app.use('/api/authentication', authenticationRoutes);
 
 app.use(errorHandler);
 
