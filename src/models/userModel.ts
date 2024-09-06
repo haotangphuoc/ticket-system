@@ -1,6 +1,4 @@
 import mongoose, { Schema, Document } from 'mongoose';
-import { Ticket } from '../interfaces/ticketInterface';
-
 export type UserRole = "CLIENT" | "ADMINISTRATOR";
 
 export interface IUser extends Document {

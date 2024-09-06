@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { Ticket } from '../../../src/interfaces/ticketInterface'
+import { Ticket } from '../interfaces/ticketInterface'
 
 const baseUrl = "http://localhost:3000/tickets";
 

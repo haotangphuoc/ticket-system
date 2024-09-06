@@ -8,6 +8,7 @@ dotenv.config();
 
 const authenticationRoutes = express.Router();
 
+// Register user with email in the DB
 authenticationRoutes.post('/register', async (req: Request, res: Response, next: NextFunction) => {
   try {
     const saltRounds = 10;
@@ -30,6 +31,7 @@ authenticationRoutes.post('/register', async (req: Request, res: Response, next:
   }
 })
 
+// Login user
 authenticationRoutes.post('/login', async (req: Request, res: Response, next: NextFunction) => {
   try {
     const { email, password } = req.body;

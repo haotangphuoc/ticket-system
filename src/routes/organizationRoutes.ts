@@ -6,12 +6,6 @@ import { tokenIsValid } from '../helpers/authorizationHelpers';
 const router = express.Router();
 
 // Get organization based on ID
-
-// Return JSON format: 
-// {
-//   "name": "string",
-//   "id": "string"
-// }
 router.get('/:id', async (req: Request, res: Response, next: NextFunction) => {
   try {
     const organization = await Organization.findById(req.params.id);
@@ -25,19 +19,6 @@ router.get('/:id', async (req: Request, res: Response, next: NextFunction) => {
 });
 
 // Get organization's users
-
-// Return JSON format:
-// {
-//   "users": [
-//       {
-//           "name": "string",
-//           "email": "string",
-//           "role": "UserRole",
-//           "id": "MongoId"
-//       },
-//       ...
-//   ]
-// }
 router.get('/:id/users', async (req: Request, res: Response, next: NextFunction) => {
   try {
     const organization = await Organization.findById(req.params.id)
@@ -65,11 +46,6 @@ router.get('/:id/users', async (req: Request, res: Response, next: NextFunction)
 });
 
 // Create organization
-
-// POST JSON format 
-// {
-//   "name": "string"
-// }
 router.post('/', async (req: Request, res: Response, next: NextFunction) => {
   try {
     if(!tokenIsValid(req)) {

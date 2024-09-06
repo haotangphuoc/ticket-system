@@ -10,15 +10,6 @@ const router = express.Router();
 
 
 // Get user based on id
-
-// Return JSON format
-// {
-//   "name": "CLIENT",
-//   "email": "string",
-//   "organizationId": "MongoId",
-//   "role": "UserRole",
-//   "id": "MongoId"
-// }
 router.get('/:id', async (req: Request, res: Response, next: NextFunction) => {
   try {
     const user = await User.findById(req.params.id);
@@ -34,31 +25,6 @@ router.get('/:id', async (req: Request, res: Response, next: NextFunction) => {
 
 
 // Get the user's incoming ticket if the user is administrator
-
-// Return JSON format
-// [
-//   {
-//       "id": "MongoID",
-//       "startDate": "YYYY-MM-DD",
-//       "endDate": "YYYY-MM-DD",
-//       "receiver": {
-//           "id": "MongoId",
-//           "email": "string"
-//       },
-//       "title": "string",
-//       "description": "string",
-//       "status": "TicketStatus",
-//       "activities": [
-//         {
-//            "id": "MongoId",
-//            "status": "TicketStatus",
-//            "comment": "string"
-//         },
-//         ...
-//       ]
-//   },
-//   ...
-// ]
 router.get('/:id/incomingTickets', async (req: Request, res: Response, next: NextFunction) => {
   try {
     const user = await User.findById(req.params.id);
@@ -105,31 +71,6 @@ router.get('/:id/incomingTickets', async (req: Request, res: Response, next: Nex
 
 
 // Get the user's outgoing tickets
-
-// Return JSON format
-// [
-//   {
-//       "id": "MongoID",
-//       "startDate": "YYYY-MM-DD",
-//       "endDate": "YYYY-MM-DD",
-//       "sender": {
-//           "id": "MongoId",
-//           "email": "string"
-//       },
-//       "title": "string",
-//       "description": "string",
-//       "status": "TicketStatus",
-//       "activities": [
-//         {
-//            "id": "MongoId",
-//            "status": "TicketStatus",
-//            "comment": "string"
-//         },
-//         ...
-//       ]
-//   },
-//   ...
-// ]
 router.get('/:id/outgoingTickets', async (req: Request, res: Response, next: NextFunction) => {
   try {
     const user = await User.findById(req.params.id);
@@ -173,14 +114,6 @@ router.get('/:id/outgoingTickets', async (req: Request, res: Response, next: Nex
 
 
 // Create new user and add the user id to organization's userIds field
-
-// POST JSON format
-// {
-//   "name": "string",
-//   "email": "string",
-//   "organizationId": "mongoId",
-//   "role": "UserRole"
-// }
 router.post('/', async (req: Request, res: Response, next: NextFunction) => {
   const session = await mongoose.startSession();
   session.startTransaction();

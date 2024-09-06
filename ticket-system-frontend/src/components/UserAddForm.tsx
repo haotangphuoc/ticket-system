@@ -1,6 +1,6 @@
 import { useState } from "react";
 import userService from "../services/userService";
-import { UserRole } from "../../../src/interfaces/userInterface";
+import { UserRole } from "../interfaces/userInterface";
 
 interface UserAddFormProps {
   handleAddUser: () => void;

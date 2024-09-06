@@ -8,29 +8,7 @@ const router = express.Router();
 
 
 
-// Get ticket based on Id
-router.get('/:id', async (req: Request, res: Response, next: NextFunction) => {
-  try {
-    const ticket = await Ticket.findById(req.params.id);
-    res.json(ticket);
-  } catch (error) {
-    next(error);
-  }
-});
-
-
-
 // Create a new ticket and add the ticket Id to sender and receiver's ticketIds field
-
-// POST JSON format
-// {
-//   "title": "string",
-//   "description": "string",
-//   "senderId": "MongoId",
-//   "receiverId": "MongoId",
-//   "startDate": "Date",
-//   "endDate": "Date"
-// }
 router.post('/', async (req: Request, res: Response, next: NextFunction) => {
   const session = await mongoose.startSession();
   session.startTransaction();
@@ -84,11 +62,6 @@ router.post('/', async (req: Request, res: Response, next: NextFunction) => {
 
 
 // Add new ticket activity to ticket's activityIds field
-// POST JSON format
-// {
-//   "status": "TicketStatus",
-//   "comments"?: "string"
-// }
 router.post('/:id/activities', async (req: Request, res: Response, next: NextFunction) => {
   try {
     if(!tokenIsValid(req)) {
@@ -115,15 +88,6 @@ router.post('/:id/activities', async (req: Request, res: Response, next: NextFun
 
 
 // Edit fields of ticket
-// PATCH JSON format
-// {
-//   "title"?: "string",
-//   "description"?: "string",
-//   "senderId"?: "MongoId",
-//   "receiverId"?: "MongoId",
-//   "startDate"?: "Date",
-//   "endDate"?: "Date"
-// }
 router.patch('/:id', async (req: Request, res: Response, next: NextFunction) => {
   try {
     if(!tokenIsValid(req)) {

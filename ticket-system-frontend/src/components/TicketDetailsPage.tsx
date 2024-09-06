@@ -1,4 +1,4 @@
-import { Ticket } from '../../../src/interfaces/ticketInterface'
+import { Ticket } from '../interfaces/ticketInterface'
 import { useState } from 'react';
 import TicketEditForm from './TicketEditForm';
 import { useNavigate } from 'react-router-dom';

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { User } from '../../../src/interfaces/userInterface'
+import { User } from '../interfaces/userInterface'
 
 const baseUrl = "http://localhost:3000/users";
 
