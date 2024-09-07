@@ -56,7 +56,7 @@ authenticationRoutes.post('/login', async (req: Request, res: Response, next: Ne
       return res.status(500).json({message: 'env.SECRET does not exists!'});
     }
     const token = jwt.sign(webTokenUserInfo, process.env.SECRET);
-    res.status(200).json({token, user});
+    return res.status(200).json({token, user});
     
   } catch(error) {
     next(error);

@@ -1,9 +1,12 @@
 import '../css/Homepage.css';
-import { Link } from 'react-router-dom'
-import { useUserRole } from '../utils/customHooks';
+import { Link, Navigate } from 'react-router-dom'
+import { useUser } from '../utils/customHooks';
 
 const NavBar = (): JSX.Element => {
-  const userRole = useUserRole();
+  const user = useUser();
+  if(!user) {
+    return <Navigate to="/login"/>
+  }
   const linkClassAttributes = "nav-link fs-5 text-light";
 
   const handleLogout = (e: React.SyntheticEvent) => {
@@ -19,7 +22,7 @@ const NavBar = (): JSX.Element => {
   return (
     <div>
       {
-        userRole === "CLIENT"
+        user.role === "CLIENT"
         ? <div className="bg-primary p-4 d-flex align-items-end justify-content-between">
             <Link className="nav-link fw-bolder fs-1 text-light" to="/">Ticket 4me</Link>
             <a className={linkClassAttributes} aria-disabled="true" onClick={(e) => handleLogout(e)}><u>Log out</u></a>

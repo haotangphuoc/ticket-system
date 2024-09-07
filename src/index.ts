@@ -4,11 +4,13 @@ import { connectDB } from './config/db';
 import organizationRoutes from './routes/organizationRoutes';
 import ticketRoutes from './routes/ticketRoutes';
 import userRoutes from './routes/userRoutes';
-import authenticationRoutes from './routes/authentication'
+import authenticationRoutes from './routes/authenticationRoutes'
 import { errorHandler } from './middlewares/errorHandler';
+import cors from 'cors';
 
 dotenv.config();
 const app = express();
+app.use(cors());
 app.use(express.json());
 
 connectDB();

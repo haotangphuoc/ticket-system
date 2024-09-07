@@ -1,17 +1,15 @@
 import { useContext } from "react";
-import { UserRole } from "../../../src/interfaces/userInterface";
+import { UserGetByIdParams } from "../interfaces/userInterface";
 import { Context } from "./Context";
-import { Ticket } from "../../../src/interfaces/ticketInterface";
 
-export const useUserRole = (): UserRole => {
-  const { userRole } = useContext(Context);
-  // if (!userRole) throw new Error("userRole is not defined");
-  return userRole as UserRole;
+export const useUser = (): UserGetByIdParams | null => {
+  const { user } = useContext(Context);
+  return user;
 }
 
-export const useTickets = (): Ticket[] => {
-  const { tickets } = useContext(Context);
-  // if (!tickets) throw new Error("tickets is not defined");
-  return tickets;
+export const useSetUser = () => {
+  const { setUser } = useContext(Context);
+  
+  return setUser;
 }
 

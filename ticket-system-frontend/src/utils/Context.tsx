@@ -1,37 +1,24 @@
-import { createContext, useEffect, useState } from "react";
-import ticketService from "../services/ticketService";
+import { createContext, useState } from "react";
 import { ReactNode } from "react";
-import { Ticket } from "../../../src/interfaces/ticketInterface";
-import { UserRole } from "../../../src/interfaces/userInterface";
+import { UserGetByIdParams } from "../interfaces/userInterface";
 
 interface ContextType {
-  tickets: Ticket[],
-  userRole: UserRole | null
+  user: UserGetByIdParams | null,
+  setUser: React.Dispatch<React.SetStateAction<UserGetByIdParams | null>>
 }
 
-export const Context = createContext<ContextType>({tickets: [], userRole: null});
+export const Context = createContext<ContextType>(
+  {
+    user: null, 
+    setUser: () => {}
+  }
+);
 
 export const ContextProvider = ({ children }: { children: ReactNode }) => {
-  const [tickets, setTickets] = useState<Ticket[]>([]);
-  const [userRole, setUserRole] = useState<UserRole | null>(null);
-
-  useEffect(() => {
-    const fetchTicket = async () => {
-      const ticketResult = await ticketService.getAllTickets();
-      if (ticketResult instanceof Error) {
-        console.log("Unable to fetch tickets");
-      }
-      else {
-        setTickets(ticketResult);
-      }
-    }
-
-    fetchTicket();
-    setUserRole("ADMINISTRATOR")
-  }, []);
+  const [user, setUser] = useState<UserGetByIdParams | null>(null);
 
   return(
-    <Context.Provider value={{tickets: tickets, userRole: userRole}}>
+    <Context.Provider value={{user: user, setUser: setUser}}>
       {children}
     </Context.Provider>
   )
