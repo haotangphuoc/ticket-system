@@ -3,7 +3,7 @@ import "../../css/TicketDashboard.css";
 import { useEffect, useState } from "react";
 import userService from "../../services/userService";
 import { AxiosError } from "axios";
-import { useSetAlert, useRefetchFlag } from "../../utils/contextCustomHooks";
+import { useSetAlert, useRefetchFlag, useTicketFilter } from "../../utils/contextCustomHooks";
 import { UserIncomingTicket, UserOutgoingTicket } from "../../interfaces/userInterface";
 
 interface TicketDashboardProps {
@@ -16,6 +16,7 @@ const TicketDashboard = ({ ticketDirection }: TicketDashboardProps) : JSX.Elemen
   const [tickets, setTickets] = useState<UserIncomingTicket[] | UserOutgoingTicket[]>([]);
   const setAlert = useSetAlert();
   const ticketsRefetchFlag = useRefetchFlag();
+  const ticketFilter = useTicketFilter();
 
   const isOverdue = (endDate: string): boolean => {
     const endDateObj = new Date(endDate);
@@ -37,10 +38,8 @@ const TicketDashboard = ({ ticketDirection }: TicketDashboardProps) : JSX.Elemen
           setAlert('Internal server error!');
           throw new Error('Internal server error!');
         }
-        console.log(ticketDirection)
         if(ticketDirection === "INCOMING") {
           const res = await userService.getUserIncomingTickets(currentUserId);
-          console.log(res)
           setTickets(res);
         } 
         else {
@@ -60,6 +59,13 @@ const TicketDashboard = ({ ticketDirection }: TicketDashboardProps) : JSX.Elemen
     fetchTickets();
   }, [currentUserId, ticketDirection, setAlert, ticketsRefetchFlag])
   
+  const filteredTickets = tickets.filter(ticket => {
+    if(!ticketFilter) {
+      return(ticket);
+    }
+    return(ticket.status === ticketFilter)
+  });
+
   return(
     <div className="w-100 vh-100 border border-2">
       <div className="text-center my-4 fs-3 fw-bold">
@@ -67,9 +73,9 @@ const TicketDashboard = ({ ticketDirection }: TicketDashboardProps) : JSX.Elemen
       </div>
       {
         <div className="ticket-dashboard">
-          { tickets.length === 0
+          { filteredTickets.length === 0
             ? <div className="text-center">No ticket to display</div>
-            : tickets.map(ticket => (
+            : filteredTickets.map(ticket => (
                 <div key={ticket.id}>
                   <Link to={`/tickets/${ticketDirection}/${ticket.id}`} className="text-decoration-none">
                     <div className="container border p-2 d-flex flex-row align-items-center justify-content-between custom-hover">

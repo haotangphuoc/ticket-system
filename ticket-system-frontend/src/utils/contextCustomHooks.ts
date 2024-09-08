@@ -22,3 +22,14 @@ export const useSetAlert = () => {
   return setAlert;
 }
 
+export const useTicketFilter = () => {
+  const { ticketFilter } = useContext(Context);
+  return ticketFilter;
+}
+
+export const useSetTicketFilter = () => {
+  const { setTicketFilter } = useContext(Context);
+  return setTicketFilter;
+}
+
+

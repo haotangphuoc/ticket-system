@@ -5,7 +5,9 @@ interface ContextType {
   refetchFlag: boolean,
   setRefetchFlag: React.Dispatch<React.SetStateAction<boolean>>,
   alert: string,
-  setAlert: React.Dispatch<React.SetStateAction<string>>
+  setAlert: React.Dispatch<React.SetStateAction<string>>,
+  ticketFilter: string,
+  setTicketFilter: React.Dispatch<React.SetStateAction<string>>
 }
 
 export const Context = createContext<ContextType>(
@@ -14,15 +16,18 @@ export const Context = createContext<ContextType>(
     setRefetchFlag: () => {},
     alert: '',
     setAlert: () => {},
+    ticketFilter: '',
+    setTicketFilter: () => {}
   }
 );
 
 export const ContextProvider = ({ children }: { children: ReactNode }) => {
   const [ refetchFlag, setRefetchFlag ] = useState(false);
   const [ alert, setAlert ] = useState<string>('');
+  const [ ticketFilter, setTicketFilter ] = useState<string>('');
 
   return(
-    <Context.Provider value={{ refetchFlag, setRefetchFlag, alert, setAlert}}>
+    <Context.Provider value={{ refetchFlag, setRefetchFlag, alert, setAlert, ticketFilter, setTicketFilter}}>
       {children}
     </Context.Provider>
   )
