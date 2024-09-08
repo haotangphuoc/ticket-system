@@ -4,15 +4,17 @@ import { useNavigate, useParams } from 'react-router-dom';
 import ticketService from '../../services/ticketService';
 import { AxiosError } from 'axios';
 import { TicketGetByIdFields } from '../../interfaces/ticketInterface';
-import { useSetAlert } from '../../utils/contextCustomHooks';
+import { useRefetchFlag, useSetAlert } from '../../utils/contextCustomHooks';
 
 const TicketDetailsPage = (): JSX.Element => {
+  const today = new Date();
   const { ticketDirection, id } = useParams();
   const [ticket, setTicket] = useState<TicketGetByIdFields | undefined>();
   const [showForm, setShowForm] = useState(false);
 
   const navigate = useNavigate();
   const setAlert = useSetAlert();
+  const refetchFlag = useRefetchFlag();
 
   const handleGoBack = () => {
     navigate(-1);
@@ -26,6 +28,13 @@ const TicketDetailsPage = (): JSX.Element => {
     const dateObject = new Date(date);
     const options: Intl.DateTimeFormatOptions = { month: 'long', day: 'numeric' };
     return dateObject.toLocaleDateString('en-US', options);
+  }
+  const isOverdue = (endDate: string): boolean => {
+    const endDateObj = new Date(endDate);
+    return endDateObj > today;
+  }
+  const endDateContainerTextColor = (endDate: string): string => {
+    return isOverdue(endDate) ? 'text-success': 'text-danger'
   }
 
   useEffect(() => {
@@ -50,14 +59,14 @@ const TicketDetailsPage = (): JSX.Element => {
     }
 
     fetchTicket();
-  }, [setAlert, id])
+  }, [setAlert, id, refetchFlag])
 
   
   return (
     <div>
       {ticket && (
         <div>
-          {showForm && <TicketEditForm handleEditTicket={handleEditTicket} />}
+          {showForm && <TicketEditForm handleEditTicket={handleEditTicket} ticketId={id}/>}
           
           <div className={`container m-4 ${showForm ? "client-dashboard-overlay" : ""}`}>
             <div className="my-4">
@@ -89,8 +98,8 @@ const TicketDetailsPage = (): JSX.Element => {
               <p className="text-secondary mb-1">
                 Requested on: <b>{convertDayFormat(ticket.startDate)}</b>
               </p>
-              <p className="text-secondary">
-                Deadline: <b>{convertDayFormat(ticket.startDate)}</b>
+              <p className='text-seondary'>
+                Deadline: <b className={endDateContainerTextColor(ticket.endDate)}>{convertDayFormat(ticket.endDate)}</b>
               </p>
             </div>
             <div className="mt-4" style={{ minHeight: "150px" }}>
@@ -103,7 +112,7 @@ const TicketDetailsPage = (): JSX.Element => {
               {ticket.activities.map((activity) => (
                 <div className="border-top py-4 ps-5" key={activity.id}>
                   <p>
-                    <b>The status is changed to: {activity.status}</b>
+                    <b>Ticket status is changed to: {activity.status}</b>
                   </p>
                   <p className="text-secondary mb-1">
                     <b>Comment:</b> {activity.comment}
