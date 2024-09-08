@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import ticketService from '../../services/ticketService'; 
-import { useSetAlert } from '../../utils/contextCustomHooks';
+import { useSetAlert, useSetTicketsRefetchFlag, useTicketsRefetchFlag } from '../../utils/contextCustomHooks';
 import { AxiosError } from 'axios';
 
 interface TicketAddFormProps {
@@ -14,9 +14,11 @@ const TicketAddForm = ({ handleAddTicket }: TicketAddFormProps): JSX.Element => 
     description: '',
     endDate: '' 
   });
-  const setAlert = useSetAlert();
   const currentUserId = window.localStorage.getItem("currentUserId");
   const token = window.localStorage.getItem("ticket4MeToken");
+  const ticketsRefetchFlag = useTicketsRefetchFlag();
+  const setTicketsRefetchFlag = useSetTicketsRefetchFlag();
+  const setAlert = useSetAlert();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { id, value } = e.target;
@@ -48,6 +50,7 @@ const TicketAddForm = ({ handleAddTicket }: TicketAddFormProps): JSX.Element => 
 
       const createdTicket = await ticketService.createTicket(ticketData);
       console.log('Ticket created successfully:', createdTicket);
+      setTicketsRefetchFlag(!ticketsRefetchFlag);
     } catch (err) {
       if(err instanceof AxiosError) {
         setAlert(err.response?.data.message || "An unknown error occured!");

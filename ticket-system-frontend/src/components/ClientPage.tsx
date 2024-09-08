@@ -16,7 +16,7 @@ const ClientPage = ({handleLogout}: ClientPageProps): JSX.Element => {
       </div>
       <Routes>
         <Route path="/homepage" element={<TicketOutgoingPage/>} />
-        <Route path="/tickets/:id" element={<TicketDetailsPage/>}/>
+        <Route path="/tickets/:ticketDirection/:id" element={<TicketDetailsPage/>}/>
       </Routes>
     </div>
   )

@@ -1,35 +1,28 @@
 import { createContext, useState } from "react";
 import { ReactNode } from "react";
-import { UserGetByIdFields } from "../interfaces/userInterface";
 
 interface ContextType {
-  user: UserGetByIdFields | null,
-  setUser: React.Dispatch<React.SetStateAction<UserGetByIdFields | null>>,
+  ticketsRefetchFlag: boolean,
+  setTicketsRefetchFlag: React.Dispatch<React.SetStateAction<boolean>>,
   alert: string,
   setAlert: React.Dispatch<React.SetStateAction<string>>
 }
 
 export const Context = createContext<ContextType>(
   {
-    user: null, 
-    setUser: () => {},
+    ticketsRefetchFlag: false, 
+    setTicketsRefetchFlag: () => {},
     alert: '',
     setAlert: () => {},
   }
 );
 
 export const ContextProvider = ({ children }: { children: ReactNode }) => {
-  const [user, setUser] = useState<UserGetByIdFields | null>(null);
+  const [ticketsRefetchFlag, setTicketsRefetchFlag] = useState(false);
   const [alert, setAlert] = useState<string>('');
 
   return(
-    <Context.Provider value={
-      {
-        user: user, 
-        setUser: setUser, 
-        alert: alert, 
-        setAlert: setAlert}
-    }>
+    <Context.Provider value={{ ticketsRefetchFlag, setTicketsRefetchFlag, alert, setAlert}}>
       {children}
     </Context.Provider>
   )

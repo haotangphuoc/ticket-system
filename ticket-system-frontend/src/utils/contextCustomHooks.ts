@@ -1,15 +1,15 @@
 import { useContext } from "react";
 import { Context } from "./Context";
 
-export const useUser = () => {
-  const { user } = useContext(Context);
-  return user;
+export const useTicketsRefetchFlag = () => {
+  const { ticketsRefetchFlag } = useContext(Context);
+  return ticketsRefetchFlag;
 }
 
-export const useSetUser = ()=> {
-  const { setUser } = useContext(Context);
+export const useSetTicketsRefetchFlag = ()=> {
+  const { setTicketsRefetchFlag } = useContext(Context);
   
-  return setUser;
+  return setTicketsRefetchFlag;
 }
 
 export const useAlert = () => {

@@ -1,9 +1,8 @@
-import Alert from './Alert';
 import { useSetAlert} from '../utils/contextCustomHooks';
 import ClientPage from './ClientPage';
 import AdministratorPage from './AdministratorPage';
 import { useNavigate } from 'react-router-dom';
-import '../css/Homepage.css'
+import '../css/Homepage.css';
 
 
 const HomePage = () : JSX.Element => {
@@ -27,7 +26,6 @@ const HomePage = () : JSX.Element => {
   }
   return (
     <div>
-      <Alert/>
       {
         currentUserRole === "CLIENT" ? <ClientPage handleLogout={handleLogout}/> : <AdministratorPage handleLogout={handleLogout}/>
       }

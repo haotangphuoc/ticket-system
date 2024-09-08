@@ -2,8 +2,8 @@ import { Link, Route, Routes } from "react-router-dom"
 import TicketOutgoingPage from "./ticket/TicketOutgoingPage"
 import TicketIncomingPage from "./ticket/TicketIncomingPage"
 import UserManagePage from "./user/UserManagePage"
-// import TicketDetailsPage from "./TicketDetailsPage"
-// import TicketDetailsPage from "./TicketDetailsPage"
+import TicketDetailsPage from "./ticket/TicketDetailsPage"
+
 
 interface AdministratorPageProps {
   handleLogout: (e: React.SyntheticEvent) => void
@@ -23,7 +23,7 @@ const AdministratorPage = ({handleLogout}: AdministratorPageProps): JSX.Element 
         <Route path="/homepage" element={<TicketIncomingPage/>} />
         <Route path="/outgoing-tickets" element={<TicketOutgoingPage/>} />
         <Route path="/users" element={<UserManagePage/>} />
-        {/* <Route path="/tickets/:id" element={<TicketDetailsPage ticket={ticket}/>}/> */}
+        <Route path="/tickets/:ticketDirection/:id" element={<TicketDetailsPage/>}/>
       </Routes>
     </div>
   )

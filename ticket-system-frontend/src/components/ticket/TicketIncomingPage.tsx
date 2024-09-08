@@ -6,10 +6,10 @@ const TicketIncomingPage = (): JSX.Element => {
     <div>
       <div className={`row d-flex justify-content-between`}>
         <div className="col-3">
-          <TicketInfoTab infoTabType="INCOMING"/>
+          <TicketInfoTab ticketDirection="INCOMING"/>
         </div>
         <div className="col-9">
-          <TicketDashboard dashboardType="INCOMING"/>
+          <TicketDashboard ticketDirection="INCOMING"/>
         </div>
       </div> 
     </div>

@@ -7,13 +7,12 @@ import { TicketGetByIdFields } from '../../interfaces/ticketInterface';
 import { useSetAlert } from '../../utils/contextCustomHooks';
 
 const TicketDetailsPage = (): JSX.Element => {
-  const { id } = useParams();
+  const { ticketDirection, id } = useParams();
   const [ticket, setTicket] = useState<TicketGetByIdFields | undefined>();
-
   const currentUserRole = window.localStorage.getItem("currentUserRole");
   const [showForm, setShowForm] = useState(false);
-  const navigate = useNavigate();
 
+  const navigate = useNavigate();
   const setAlert = useSetAlert();
 
   const handleGoBack = () => {
@@ -31,6 +30,8 @@ const TicketDetailsPage = (): JSX.Element => {
   }
 
   useEffect(() => {
+
+    // Fetch ticket from id params
     const fetchTicket = async () => {
       try {
         if (!id) {
@@ -61,7 +62,8 @@ const TicketDetailsPage = (): JSX.Element => {
           
           <div className={`container m-4 ${showForm ? "client-dashboard-overlay" : ""}`}>
             <div className="my-4">
-              {currentUserRole === "ADMINISTRATOR" && (
+              {currentUserRole === "ADMINISTRATOR" && ticketDirection === "INCOMING" && 
+              (
                 <button className="btn btn-primary me-2" onClick={handleEditTicket}>
                   Edit Ticket
                 </button>

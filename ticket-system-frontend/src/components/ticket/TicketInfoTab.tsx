@@ -1,13 +1,13 @@
 interface TicketDashboardProps {
   handleAddTicket?: () => void,
-  infoTabType: "INCOMING" | "OUTGOING"
+  ticketDirection: "INCOMING" | "OUTGOING"
 }
 
-const TicketInfoTab = ({ handleAddTicket, infoTabType }: TicketDashboardProps): JSX.Element => {
+const TicketInfoTab = ({ handleAddTicket, ticketDirection }: TicketDashboardProps): JSX.Element => {
   return (
     <div className={`container d-flex flex-column ps-4 vh-100`}>
       {/* Only show add ticket button for ticket manage page */}
-      {infoTabType === "OUTGOING" && (
+      {ticketDirection === "OUTGOING" && (
         <div className="m-4 btn btn-primary mx-2" onClick={handleAddTicket}>+ Add ticket</div>
       )}
       

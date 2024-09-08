@@ -3,18 +3,19 @@ import "../../css/TicketDashboard.css";
 import { useEffect, useState } from "react";
 import userService from "../../services/userService";
 import { AxiosError } from "axios";
-import { useSetAlert } from "../../utils/contextCustomHooks";
+import { useSetAlert, useTicketsRefetchFlag } from "../../utils/contextCustomHooks";
 import { UserIncomingTicket, UserOutgoingTicket } from "../../interfaces/userInterface";
 
 interface TicketDashboardProps {
-  dashboardType : "INCOMING" | "OUTGOING"
+  ticketDirection : "INCOMING" | "OUTGOING"
 }
 
-const TicketDashboard = ({ dashboardType }: TicketDashboardProps) : JSX.Element => {
+const TicketDashboard = ({ ticketDirection }: TicketDashboardProps) : JSX.Element => {
   const today = new Date();
   const currentUserId = window.localStorage.getItem('currentUserId');
   const [tickets, setTickets] = useState<UserIncomingTicket[] | UserOutgoingTicket[]>([]);
   const setAlert = useSetAlert();
+  const ticketsRefetchFlag = useTicketsRefetchFlag();
 
   const isOverdue = (endDate: string): boolean => {
     const endDateObj = new Date(endDate);
@@ -36,14 +37,16 @@ const TicketDashboard = ({ dashboardType }: TicketDashboardProps) : JSX.Element 
           setAlert('Internal server error!');
           throw new Error('Internal server error!');
         }
-        console.log(dashboardType)
-        if(dashboardType === "INCOMING") {
+        console.log(ticketDirection)
+        if(ticketDirection === "INCOMING") {
           const res = await userService.getUserIncomingTickets(currentUserId);
+          console.log(res)
           setTickets(res);
         } 
-        const res = await userService.getUserOutgoingTickets(currentUserId);
-        setTickets(res);
-        
+        else {
+          const res = await userService.getUserOutgoingTickets(currentUserId);
+          setTickets(res);
+        }
       } catch(error) {
         if(error instanceof AxiosError) {
           setAlert(error.response?.data.message || "An unknown error occured!");
@@ -55,12 +58,12 @@ const TicketDashboard = ({ dashboardType }: TicketDashboardProps) : JSX.Element 
     } 
 
     fetchTickets();
-  }, [currentUserId, dashboardType, setAlert])
+  }, [currentUserId, ticketDirection, setAlert, ticketsRefetchFlag])
   
   return(
     <div className="w-100 vh-100 border border-2">
       <div className="text-center my-4 fs-3 fw-bold">
-        {(dashboardType === "INCOMING") ? "My Inbox" : "My Tickets"}
+        {(ticketDirection === "INCOMING") ? "My Inbox" : "My Tickets"}
       </div>
       {
         <div className="ticket-dashboard">
@@ -68,7 +71,7 @@ const TicketDashboard = ({ dashboardType }: TicketDashboardProps) : JSX.Element 
             ? <div className="text-center text-danger">No ticket to display</div>
             : tickets.map(ticket => (
                 <div key={ticket.id}>
-                  <Link to={`/tickets/${ticket.id}`} className="text-decoration-none">
+                  <Link to={`/tickets/${ticketDirection}/${ticket.id}`} className="text-decoration-none">
                     <div className="container border p-2 d-flex flex-row align-items-center justify-content-between custom-hover">
                       <div className="ticket-general-info">
                         <div className="fs-5 fw-bold">{ticket.title}</div>

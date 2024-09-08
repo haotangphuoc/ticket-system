@@ -15,10 +15,10 @@ const TicketOutgoingPage = (): JSX.Element => {
       {showForm && <TicketAddForm handleAddTicket={handleAddTicket}/>}
       <div className={`row d-flex justify-content-between ${showForm ? "client-dashboard-overlay" : ""}`}>
         <div className="col-3">
-          <TicketInfoTab handleAddTicket={handleAddTicket} infoTabType="OUTGOING"/>
+          <TicketInfoTab handleAddTicket={handleAddTicket} ticketDirection="OUTGOING"/>
         </div>
         <div className="col-9">
-          <TicketDashboard dashboardType="OUTGOING"/>
+          <TicketDashboard ticketDirection="OUTGOING"/>
         </div>
       </div> 
     </div>

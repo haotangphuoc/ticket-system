@@ -15,9 +15,6 @@ const LoginPage = () : JSX.Element => {
     event.preventDefault()
     try {
       const result = await authenticationService.login({email, password});
-      if (!result || !('user' in result)) {
-        throw new Error("Internal error occurred!");
-      }
       window.localStorage.setItem('ticket4MeToken', result.token);
       window.localStorage.setItem('currentUserId', result.user.id);
       window.localStorage.setItem('currentUserRole', result.user.role);
