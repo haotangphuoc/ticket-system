@@ -1,39 +1,42 @@
 import axios from 'axios';
-import { User } from '../interfaces/userInterface'
+import { UserGetByIdFields, UserIncomingTicket, UserOutgoingTicket, UserPostParams } from '../interfaces/userInterface';
 
-const baseUrl = "http://localhost:3000/users";
+const BASE_URL = "http://localhost:3000/api/users";
 
-const getAllUsers = async () : Promise<User[] | Error> => {
-  try {
-    const res = await axios.get(baseUrl);
-    return res.data;
-  } catch (error) {
-    if (axios.isAxiosError(error)) {
-    return new Error(error.message); 
-    } else {
-      return new Error('An unknown error occurred');
-    }
-  }
-}
+const getUserById = async (userId: string): Promise<UserGetByIdFields> => {
+  const response = await axios.get(`${BASE_URL}/${userId}`);
+  return response.data;
+};
 
-const createUser = async (userDate: Omit<User, 'id'| 'organizationId' | 'ticketIds' | 'password'>): Promise<User | Error> => {
-  try {
-    const newUser = {
-      id: String(Math.floor(Math.random() * 100000)),
-      organizationId: "Add organization id here", // Could be implemented in the backend
-      ticketIds: [],
-      password: '',
-      ...userDate
-    }
-    const res = await axios.post(baseUrl, newUser);
-    return res.data
-  } catch(error) {
-    if (axios.isAxiosError(error)) {
-      return new Error(error.message); 
-    } else {
-      return new Error('An unknown error occurred');
-    }
-  }
-}
+// Fetch incoming tickets for a user (administrators)
+const getUserIncomingTickets = async (userId: string): Promise<UserIncomingTicket[]> => {
+  const response = await axios.get(`${BASE_URL}/${userId}/incomingTickets`);
+  return response.data;
+};
 
-export default { getAllUsers, createUser }
+// Fetch outgoing tickets for a user
+const getUserOutgoingTickets = async (userId: string): Promise<UserOutgoingTicket[]> => {
+  const response = await axios.get(`${BASE_URL}/${userId}/outgoingTickets`);
+  return response.data;
+};
+
+// Create a new user 
+const createUser = async (userData: UserPostParams): Promise<UserGetByIdFields> => {
+  const response = await axios.post(BASE_URL, userData);
+  return response.data;
+};
+
+// Delete user by Id
+const deleteUser = async (userId: string): Promise<UserGetByIdFields> => {
+  const response = await axios.delete(`${BASE_URL}/${userId}`);
+  return response.data;
+};
+
+// Export the functions to be used in React components
+export default {
+  getUserById,
+  getUserIncomingTickets,
+  getUserOutgoingTickets,
+  createUser,
+  deleteUser
+};

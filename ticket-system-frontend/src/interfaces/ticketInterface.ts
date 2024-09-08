@@ -11,11 +11,22 @@ export interface TicketActivityPostParams {
   comment?: string
 }
 
+export interface TicketGetByIdFields {
+  id: string,
+  title: string,
+  description: string,
+  sender: { id: string, email: string},
+  receiver: { id: string, email: string},
+  activities: TicketActivity[],
+  startDate: string,
+  endDate: string
+}
+ 
 export interface TicketPostParams {
   title: string,
   description: string,
   senderId: string,
-  receiverId: string,
+  receiverEmail: string,
   startDate: string,
   endDate: string
 }

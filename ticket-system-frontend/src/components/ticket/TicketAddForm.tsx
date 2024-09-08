@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
-import ticketService from '../services/ticketService'; 
+import ticketService from '../../services/ticketService'; 
+import { useSetAlert } from '../../utils/contextCustomHooks';
+import { AxiosError } from 'axios';
 
 interface TicketAddFormProps {
   handleAddTicket: () => void;
@@ -8,10 +10,13 @@ interface TicketAddFormProps {
 const TicketAddForm = ({ handleAddTicket }: TicketAddFormProps): JSX.Element => {
   const [formData, setFormData] = useState({
     title: '',
-    email: '',
+    receiverEmail: '',
     description: '',
-    deadline: '' 
+    endDate: '' 
   });
+  const setAlert = useSetAlert();
+  const currentUserId = window.localStorage.getItem("currentUserId");
+  const token = window.localStorage.getItem("ticket4MeToken");
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { id, value } = e.target;
@@ -24,18 +29,33 @@ const TicketAddForm = ({ handleAddTicket }: TicketAddFormProps): JSX.Element => 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     
-    const ticketData = {
-      title: formData.title,
-      description: formData.description,
-      receiverId: formData.email,
-      endDate: formData.deadline
-    };
-    
     try {
+      if(!currentUserId || !token) {
+        setAlert("Internal server error!");
+        throw new Error('Internal server error!');
+      }
+
+      const ticketData = {
+        title: formData.title,
+        description: formData.description,
+        senderId: currentUserId,
+        receiverEmail: formData.receiverEmail,
+        startDate: new Date().toISOString(),
+        endDate: formData.endDate
+      };
+
+      console.log(ticketData);
+
       const createdTicket = await ticketService.createTicket(ticketData);
       console.log('Ticket created successfully:', createdTicket);
-    } catch (error) {
-      console.error('Error creating ticket:', error);
+    } catch (err) {
+      if(err instanceof AxiosError) {
+        setAlert(err.response?.data.message || "An unknown error occured!");
+      }
+      else {
+        setAlert("An unknown error occured!");
+      }
+      
     }
 
     // Change state
@@ -60,13 +80,13 @@ const TicketAddForm = ({ handleAddTicket }: TicketAddFormProps): JSX.Element => 
           </div>
 
           <div className="mb-3">
-            <label htmlFor="email" className="form-label fw-bold">Assign To: </label>
+            <label htmlFor="receiverEmail" className="form-label fw-bold">Assign To: </label>
             <input
               type="email"
               className="form-control"
-              id="email"
-              placeholder="Enter administrator email"
-              value={formData.email}
+              id="receiverEmail"
+              placeholder="Enter administrator email:"
+              value={formData.receiverEmail}
               onChange={handleChange}
             />
           </div>
@@ -84,12 +104,12 @@ const TicketAddForm = ({ handleAddTicket }: TicketAddFormProps): JSX.Element => 
           </div>
 
           <div className="mb-3">
-            <label htmlFor="deadline" className="form-label fw-bold">Deadline: </label>
+            <label htmlFor="endDate" className="form-label fw-bold">Deadline: </label>
             <input
               type="date"
               className="form-control"
-              id="deadline"
-              value={formData.deadline}
+              id="endDate"
+              value={formData.endDate}
               onChange={handleChange}
             />
           </div>

@@ -1,4 +1,4 @@
-import { UserGetByIdParams } from "./userInterface"
+import { UserGetByIdFields } from "./userInterface"
 
 export interface UserRegisterParams {
   password: string,
@@ -10,7 +10,7 @@ export interface UserLoginParams {
   email: string
 }
 
-export interface LoginReturnParams {
+export interface LoginReturnFields {
   token: string,
-  user: UserGetByIdParams
+  user: UserGetByIdFields
 }

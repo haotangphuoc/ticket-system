@@ -1,29 +1,36 @@
 import { useState } from 'react';
 import '../css/LoginPage.css'
-import { useSetUser } from '../utils/customHooks';
+import { useSetAlert } from '../utils/contextCustomHooks';
 import authenticationService from '../services/authenticationService';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { AxiosError } from 'axios';
 
 const LoginPage = () : JSX.Element => {
   const [ email, setEmail ] = useState('');
   const [ password, setPassword ] = useState('');
-  const setUser = useSetUser();
   const navigate = useNavigate();
+  const setAlert = useSetAlert();
 
-  const handleSubmit = async (event: React.SyntheticEvent) => {
+  const handleLogin = async (event: React.SyntheticEvent) => {
     event.preventDefault()
     try {
-      const result = await authenticationService.login({email, password,})
+      const result = await authenticationService.login({email, password});
       if (!result || !('user' in result)) {
         throw new Error("Internal error occurred!");
       }
-      setUser(result.user)
-      setEmail('')
-      setPassword('')
-      navigate('/');
-      console.log("successful")
+      window.localStorage.setItem('ticket4MeToken', result.token);
+      window.localStorage.setItem('currentUserId', result.user.id);
+      window.localStorage.setItem('currentUserRole', result.user.role);
+      setEmail('');
+      setPassword('');
+      navigate('/homepage');
+      setAlert("Logged in successfully!");
     } catch(error) {
-      console.log(error)
+      if (error instanceof AxiosError) {
+        setAlert(error.response?.data.message || 'An unknown error occurred');
+      } else {
+        setAlert('An unknown error occurred');
+      }
     }
   }
   
@@ -37,7 +44,7 @@ const LoginPage = () : JSX.Element => {
           <div className='mb-2'>
           <h1 className='login-label'>Sign In</h1>
           </div>
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleLogin}>
             <div className="mb-3">
               <p className="htmlForm-label mb-0">Email address:</p>
               <input type="email" className="htmlForm-control" id="email" aria-describedby="emailHelp" value={email} onChange={(e) => setEmail(e.target.value)}/>
@@ -46,14 +53,14 @@ const LoginPage = () : JSX.Element => {
               <p className="htmlForm-label mb-0">Password:</p>
               <input type="password" className="htmlForm-control" id="exampleInputPassword1" value={password} onChange={(e) => setPassword(e.target.value)}/>
             </div>
-
             <button type="submit" className="btn btn-primary w-100 rounded-pill">Submit</button>
           </form>
+          <br />
+          <Link to="/register">Dont have an account? Register here</Link>
         </div>
         
       </div>
     </div>
-    
   )
 }
 

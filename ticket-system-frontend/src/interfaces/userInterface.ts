@@ -2,7 +2,7 @@ import { TicketActivity, TicketStatus } from "./ticketInterface";
 
 export type UserRole = "CLIENT" | "ADMINISTRATOR";
 
-export interface UserGetByIdParams {
+export interface UserGetByIdFields {
   id: string,
   name: string,
   email: string,
@@ -17,7 +17,7 @@ export interface UserPostParams {
   role: UserRole
 }
 
-export interface UserOutgoingTicketGetParams {
+export interface UserOutgoingTicket {
   id: string,
   title: string,
   description: string,
@@ -25,10 +25,10 @@ export interface UserOutgoingTicketGetParams {
   startDate: string,  
   endDate: string,    
   activities: TicketActivity[],
-  receiverId: { id: string, email: string }
+  receiver: { id: string, email: string }
 }
 
-export interface UserIncomingTicketGetParams  {
+export interface UserIncomingTicket  {
   id: string,
   title: string,
   description: string,
@@ -36,5 +36,5 @@ export interface UserIncomingTicketGetParams  {
   startDate: string,  
   endDate: string,    
   activities: TicketActivity[],
-  senderId: { id: string, email: string }
+  sender: { id: string, email: string }
 }

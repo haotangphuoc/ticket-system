@@ -18,7 +18,7 @@ const TicketOutgoingPage = (): JSX.Element => {
           <TicketInfoTab handleAddTicket={handleAddTicket} infoTabType="OUTGOING"/>
         </div>
         <div className="col-9">
-          <TicketDashboard infoTabType="OUTGOING"/>
+          <TicketDashboard dashboardType="OUTGOING"/>
         </div>
       </div> 
     </div>

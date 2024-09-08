@@ -16,7 +16,10 @@ authenticationRoutes.post('/register', async (req: Request, res: Response, next:
     const { email, password } = req.body;
     const user = await User.findOne({ email: email });
     if (!user) {
-      return res.status(400).json({mesage: 'Email does not exist in DB, require permission from an administrator!'});
+      return res.status(400).json({message: 'Email does not exist in DB, require permission from an administrator!'});
+    }
+    if (user.passwordHash) {
+      return res.status(400).json({message: 'Email has already been registered, please login!'});
     }
 
     const updatedUser = await User.findOneAndUpdate(
@@ -25,7 +28,7 @@ authenticationRoutes.post('/register', async (req: Request, res: Response, next:
       { new: true, runValidators: true } 
     );
 
-    return res.status(201).json(updatedUser);
+    return res.status(201).json({user: updatedUser});
   } catch(error) {
     next(error);
   }
@@ -40,13 +43,13 @@ authenticationRoutes.post('/login', async (req: Request, res: Response, next: Ne
       return res.status(400).json({message: 'Email does not exist in DB, require permission from an administrator!'});
     }
     if(user.passwordHash === '') {
-      return res.status(400).json({mesage: 'User is not yet registered!'});
+      return res.status(400).json({message: 'User is not yet registered!'});
     }
     const passwordCorrect = user === null
       ? false
       : await bcrypt.compare(password, user.passwordHash);
     if(!passwordCorrect) {
-      return res.status(401).json({mesage: 'Invalid userame or password'});
+      return res.status(401).json({message: 'Invalid userame or password'});
     }
     const webTokenUserInfo = {
       email: user.email,

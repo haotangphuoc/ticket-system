@@ -1,42 +1,36 @@
-import { Routes, Route, useMatch, useNavigate, Navigate } from 'react-router-dom'
-import NavBar from "./NavBar";
-import TicketDetailsPage from "./TicketDetailsPage";
-import UserManagePage from "./UserManagePage";
-import TicketIncomingPage from './TicketIncomingPage';
-import TicketOutgoingPage from './TicketOutgoingPage';
-import LoginPage from './LoginPage';
-import RegisterPage from './RegisterPage';
-import { ProtectedRoute } from '../utils/ProtectedRoutes';
-import Hello from './Hello';
+import Alert from './Alert';
+import { useSetAlert} from '../utils/contextCustomHooks';
+import ClientPage from './ClientPage';
+import AdministratorPage from './AdministratorPage';
+import { useNavigate } from 'react-router-dom';
+import '../css/Homepage.css'
 
 
 const HomePage = () : JSX.Element => {
+  const currentUserRole = window.localStorage.getItem('currentUserRole');
+  const setAlert = useSetAlert();
+  const navigate = useNavigate();
 
-  // const match = useMatch("/tickets/:id");
-  // const ticket = match 
-  //   ? tickets.find(ticket => ticket.id === match.params.id)
-  //   : null
+  if(!currentUserRole) {
+    setAlert('Internal server error!');
+  }
 
+  const handleLogout = (e: React.SyntheticEvent) => {
+    e.preventDefault();
+    const confirmLogout = window.confirm("Are you sure you want to log out?");
+    if (confirmLogout) {
+      window.localStorage.removeItem('token');
+      window.localStorage.removeItem('currentUserId');
+      window.localStorage.removeItem('currentUserRole');
+    }
+    navigate('/login');
+  }
   return (
     <div>
-      <NavBar/>
-      <Routes>
-        <Route path="/login" element={<LoginPage/>} />
-        <Route path="/register" element={<RegisterPage/>} />
-        <Route element={<ProtectedRoute roleRequired="CLIENT"/>}>
-          <Route path="/" element={<Hello/>}/>
-          {/* <Route path="/" element={<TicketOutgoingPage/>} /> */}
-          {/* <Route path="/tickets/:id" element={<TicketDetailsPage ticket={ticket}/>}/> */}
-        </Route>
-        <Route element={<ProtectedRoute roleRequired="ADMINISTRATOR"/>}>
-          <Route path="/" element={<Hello/>}/>
-          {/* <Route path="/" element={<TicketIncomingPage/>} />
-          <Route path="/outgoing-tickets" element={<TicketOutgoingPage/>} />
-          <Route path="/users" element={<UserManagePage/>} /> */}
-          {/* <Route path="/tickets/:id" element={<TicketDetailsPage ticket={ticket}/>}/> */}
-        </Route>
-      </Routes>
-      
+      <Alert/>
+      {
+        currentUserRole === "CLIENT" ? <ClientPage handleLogout={handleLogout}/> : <AdministratorPage handleLogout={handleLogout}/>
+      }
     </div>
   )
 }

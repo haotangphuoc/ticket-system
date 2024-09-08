@@ -6,7 +6,45 @@ import { tokenIsValid } from '../helpers/authorizationHelpers';
 
 const router = express.Router();
 
+router.get('/:id', async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const ticket = await Ticket.findById(req.params.id)
+      .populate({
+        path: 'senderId',
+        select: 'email'
+      })
+      .populate({
+        path: 'receiverId',
+        select: 'email'
+      });
+    if (!ticket) {
+      return res.status(404).json({ message: 'Ticket not found!' });
+    }
+    const { activities, _id, __v, senderId, receiverId, startDate, endDate, ...rest } = ticket.toObject();
+    const transformedTicket = 
+    {
+        id: _id,
+        activities: activities.map((activity:ITicketActivity) => {
+          const {_id, ...rest} = activity
+          return {
+            id: _id,
+            ...rest
+          }
+        }),
+        // @ts-ignore
+        sender: { id: senderId._id, email: senderId.email },
+        // @ts-ignore
+        receiver: { id: receiverId._id, email: receiverId.email },
+        startDate: startDate.toISOString().split('T')[0],
+        endDate: endDate.toISOString().split('T')[0],
+        ...rest
+    }
 
+    return res.status(200).json(transformedTicket);
+  } catch (error) {
+    next(error);
+  }
+});
 
 // Create a new ticket and add the ticket Id to sender and receiver's ticketIds field
 router.post('/', async (req: Request, res: Response, next: NextFunction) => {
@@ -17,8 +55,15 @@ router.post('/', async (req: Request, res: Response, next: NextFunction) => {
     if(!tokenIsValid(req)) {
       return res.status(400).json({message: "Token is invalid!"});
     }
-    const { senderId, receiverId } = req.body;
-    const newTicket = new Ticket(req.body);
+    const { senderId, receiverEmail, ...rest } = req.body;
+
+    const receiver = await User.findOne({email: receiverEmail}).session(session);;
+    if(!receiver) {
+      return res.status(400).json({message: "Receiver email is invalid!"});
+    }
+    const receiverId = receiver.id;
+
+    const newTicket = new Ticket({senderId, receiverId, ...rest});
     const savedTicket = await newTicket.save({ session });
 
     // Add the ticket to the sender's outgoingTicketIds
@@ -32,10 +77,6 @@ router.post('/', async (req: Request, res: Response, next: NextFunction) => {
     await sender.save({ session });
 
     // Add the ticket to the receiver's incomingTicketIds if they are ADMINISTRATOR
-    const receiver = await User.findById(receiverId).session(session);
-    if (!receiver) {
-      return res.status(404).json({message: `Receiver with ID ${receiverId} not found.`});
-    }
     if (receiver.role === 'ADMINISTRATOR') {
       if (!receiver.incomingTicketIds) {
         receiver.incomingTicketIds = [];
@@ -58,8 +99,6 @@ router.post('/', async (req: Request, res: Response, next: NextFunction) => {
     next(error);
   }
 });
-
-
 
 // Add new ticket activity to ticket's activityIds field
 router.post('/:id/activities', async (req: Request, res: Response, next: NextFunction) => {

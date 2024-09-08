@@ -9,7 +9,7 @@ const TicketIncomingPage = (): JSX.Element => {
           <TicketInfoTab infoTabType="INCOMING"/>
         </div>
         <div className="col-9">
-          <TicketDashboard infoTabType="INCOMING"/>
+          <TicketDashboard dashboardType="INCOMING"/>
         </div>
       </div> 
     </div>
