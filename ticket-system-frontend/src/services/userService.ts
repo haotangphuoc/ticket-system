@@ -2,6 +2,7 @@ import axios from 'axios';
 import { UserGetByIdFields, UserIncomingTicket, UserOutgoingTicket, UserPostParams } from '../interfaces/userInterface';
 
 const BASE_URL = "http://localhost:3000/api/users";
+const token = window.localStorage.getItem('ticket4MeToken');
 
 const getUserById = async (userId: string): Promise<UserGetByIdFields> => {
   const response = await axios.get(`${BASE_URL}/${userId}`);
@@ -22,7 +23,17 @@ const getUserOutgoingTickets = async (userId: string): Promise<UserOutgoingTicke
 
 // Create a new user 
 const createUser = async (userData: UserPostParams): Promise<UserGetByIdFields> => {
-  const response = await axios.post(BASE_URL, userData);
+  if(!token) {
+    throw new Error("Internal server error!")
+  }
+
+  const header = {
+    headers: {
+      'Authorization': `Bearer ${token}`
+    }
+  }
+  
+  const response = await axios.post(BASE_URL, userData, header);
   return response.data;
 };
 

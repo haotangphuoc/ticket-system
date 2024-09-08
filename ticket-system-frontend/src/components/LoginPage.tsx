@@ -17,7 +17,7 @@ const LoginPage = () : JSX.Element => {
       const result = await authenticationService.login({email, password});
       window.localStorage.setItem('ticket4MeToken', result.token);
       window.localStorage.setItem('currentUserId', result.user.id);
-      window.localStorage.setItem('currentUserRole', result.user.role);
+      window.localStorage.setItem('currentUserOrganizationId', result.user.organizationId);
       setEmail('');
       setPassword('');
       navigate('/homepage');

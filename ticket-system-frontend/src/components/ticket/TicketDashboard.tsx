@@ -3,7 +3,7 @@ import "../../css/TicketDashboard.css";
 import { useEffect, useState } from "react";
 import userService from "../../services/userService";
 import { AxiosError } from "axios";
-import { useSetAlert, useTicketsRefetchFlag } from "../../utils/contextCustomHooks";
+import { useSetAlert, useRefetchFlag } from "../../utils/contextCustomHooks";
 import { UserIncomingTicket, UserOutgoingTicket } from "../../interfaces/userInterface";
 
 interface TicketDashboardProps {
@@ -15,7 +15,7 @@ const TicketDashboard = ({ ticketDirection }: TicketDashboardProps) : JSX.Elemen
   const currentUserId = window.localStorage.getItem('currentUserId');
   const [tickets, setTickets] = useState<UserIncomingTicket[] | UserOutgoingTicket[]>([]);
   const setAlert = useSetAlert();
-  const ticketsRefetchFlag = useTicketsRefetchFlag();
+  const ticketsRefetchFlag = useRefetchFlag();
 
   const isOverdue = (endDate: string): boolean => {
     const endDateObj = new Date(endDate);
@@ -68,7 +68,7 @@ const TicketDashboard = ({ ticketDirection }: TicketDashboardProps) : JSX.Elemen
       {
         <div className="ticket-dashboard">
           { tickets.length === 0
-            ? <div className="text-center text-danger">No ticket to display</div>
+            ? <div className="text-center">No ticket to display</div>
             : tickets.map(ticket => (
                 <div key={ticket.id}>
                   <Link to={`/tickets/${ticketDirection}/${ticket.id}`} className="text-decoration-none">

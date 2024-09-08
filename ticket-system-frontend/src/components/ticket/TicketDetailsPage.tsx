@@ -9,7 +9,6 @@ import { useSetAlert } from '../../utils/contextCustomHooks';
 const TicketDetailsPage = (): JSX.Element => {
   const { ticketDirection, id } = useParams();
   const [ticket, setTicket] = useState<TicketGetByIdFields | undefined>();
-  const currentUserRole = window.localStorage.getItem("currentUserRole");
   const [showForm, setShowForm] = useState(false);
 
   const navigate = useNavigate();
@@ -62,7 +61,7 @@ const TicketDetailsPage = (): JSX.Element => {
           
           <div className={`container m-4 ${showForm ? "client-dashboard-overlay" : ""}`}>
             <div className="my-4">
-              {currentUserRole === "ADMINISTRATOR" && ticketDirection === "INCOMING" && 
+              {ticketDirection === "INCOMING" && 
               (
                 <button className="btn btn-primary me-2" onClick={handleEditTicket}>
                   Edit Ticket

@@ -1,23 +1,24 @@
 import { useState } from "react";
 import userService from "../../services/userService";
-import { UserRole } from "../../interfaces/userInterface";
+import { UserPostParams } from "../../interfaces/userInterface";
+import { useRefetchFlag, useSetAlert, useSetRefetchFlag } from "../../utils/contextCustomHooks";
+import { AxiosError } from "axios";
 
 interface UserAddFormProps {
   handleAddUser: () => void;
 }
 
-interface FormDataTypes {
-  name: string,
-  email: string,
-  role: UserRole
-}
 
 const UserAddForm = ({ handleAddUser }: UserAddFormProps): JSX.Element => {
-  const [formData, setFormData] = useState<FormDataTypes>({
+  const [formData, setFormData] = useState<Omit<UserPostParams, 'organizationId'>>({
     name: '',
     email: '',
     role: 'CLIENT'
   })
+  const currentUserOrganizationId = window.localStorage.getItem('currentUserOrganizationId');
+  const setAlert = useSetAlert();
+  const refetchFlag = useRefetchFlag();
+  const setRefetchFlag = useSetRefetchFlag();
 
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement | HTMLTextAreaElement | HTMLInputElement>): void => {
     const {id, value} = e.target;
@@ -30,11 +31,26 @@ const UserAddForm = ({ handleAddUser }: UserAddFormProps): JSX.Element => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
     e.preventDefault();
     try {
-      const res = await userService.createUser(formData);
+      if(!currentUserOrganizationId) {
+        throw new Error("Internal server error");
+      }
+      const postData = {
+        name: formData.name,
+        email: formData.email,
+        role: formData.role,
+        organizationId: currentUserOrganizationId
+      }
+      const res = await userService.createUser(postData);
       console.log(res);
+      setRefetchFlag(!refetchFlag);
     }
     catch(error) {
-      console.log(error);
+      if(error instanceof AxiosError) {
+        setAlert(error.response?.data.message || "An unknown error occured!");
+      }
+      else {
+        setAlert("An unknown error occured!");
+      }
     }
     handleAddUser();
   }

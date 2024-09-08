@@ -1,23 +1,35 @@
 import { useEffect, useState } from "react";
-import userService from '../../services/userService'
-import { User } from "../../interfaces/userInterface";
+import organizationService from "../../services/organizationService";
+import { useRefetchFlag, useSetAlert } from "../../utils/contextCustomHooks";
+import { AxiosError } from "axios";
+import { OrganizationUserGetFields } from "../../interfaces/organizationInterface";
 
 const UserDashboard = (): JSX.Element => {
-  const [users, setUsers] = useState<User[]>([])
+  const [users, setUsers] = useState<OrganizationUserGetFields[]>([]);
+  const currentUserOrganizationId = window.localStorage.getItem('currentUserOrganizationId');
+  const setAlert = useSetAlert();
+  const refetchFlag = useRefetchFlag()
 
   useEffect(() => {
     const fetchUsers = async () => {
-      const result = await userService.getAllUsers();
-      if (result instanceof Error) {
-        console.log("Error");
-      }
-      else {
-        setUsers(result)
+      try {
+        if(!currentUserOrganizationId) {
+          throw new Error("Internal server error!")
+        }
+        const res = await organizationService.getOrganizationUsers(currentUserOrganizationId);
+        setUsers(res);
+      } catch(error) {
+        if(error instanceof AxiosError) {
+          setAlert(error.response?.data.message || "An unknown error occured!");
+        }
+        else {
+          setAlert("An unknown error occured!");
+        }
       }
     }
 
-    fetchUsers()
-  }, [])
+    fetchUsers();
+  }, [currentUserOrganizationId, setAlert, refetchFlag])
 
   return(
     <div >

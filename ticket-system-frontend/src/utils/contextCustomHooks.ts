@@ -1,15 +1,15 @@
 import { useContext } from "react";
 import { Context } from "./Context";
 
-export const useTicketsRefetchFlag = () => {
-  const { ticketsRefetchFlag } = useContext(Context);
-  return ticketsRefetchFlag;
+export const useRefetchFlag = () => {
+  const { refetchFlag } = useContext(Context);
+  return refetchFlag;
 }
 
-export const useSetTicketsRefetchFlag = ()=> {
-  const { setTicketsRefetchFlag } = useContext(Context);
+export const useSetRefetchFlag = ()=> {
+  const { setRefetchFlag } = useContext(Context);
   
-  return setTicketsRefetchFlag;
+  return setRefetchFlag;
 }
 
 export const useAlert = () => {

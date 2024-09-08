@@ -1,11 +1,11 @@
 import axios from 'axios';
 import { TicketGetByIdFields, TicketPostParams } from '../interfaces/ticketInterface';
 
-const baseUrl = "http://localhost:3000/api/tickets";
+const BASE_URL = "http://localhost:3000/api/tickets";
 const token = window.localStorage.getItem("ticket4MeToken");
 
 const getTicketById = async (ticketId: string): Promise<TicketGetByIdFields> => {
-  const res = await axios.get(`${baseUrl}/${ticketId}`);
+  const res = await axios.get(`${BASE_URL}/${ticketId}`);
   console.log(res.data)
   return res.data;
 }
@@ -21,7 +21,7 @@ const createTicket = async (ticketData: TicketPostParams) => {
     }
   }
 
-  const res = await axios.post(baseUrl, ticketData, header);
+  const res = await axios.post(BASE_URL, ticketData, header);
   return res.data;
 }
 

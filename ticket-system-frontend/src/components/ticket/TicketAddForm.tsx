@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
 import ticketService from '../../services/ticketService'; 
-import { useSetAlert, useSetTicketsRefetchFlag, useTicketsRefetchFlag } from '../../utils/contextCustomHooks';
+import { useSetAlert, useSetRefetchFlag, useRefetchFlag } from '../../utils/contextCustomHooks';
 import { AxiosError } from 'axios';
+import { TicketPostParams } from '../../interfaces/ticketInterface';
 
 interface TicketAddFormProps {
   handleAddTicket: () => void;
 }
 
 const TicketAddForm = ({ handleAddTicket }: TicketAddFormProps): JSX.Element => {
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<Omit<TicketPostParams, 'senderId' | 'startDate'>>({
     title: '',
     receiverEmail: '',
     description: '',
@@ -16,8 +17,8 @@ const TicketAddForm = ({ handleAddTicket }: TicketAddFormProps): JSX.Element => 
   });
   const currentUserId = window.localStorage.getItem("currentUserId");
   const token = window.localStorage.getItem("ticket4MeToken");
-  const ticketsRefetchFlag = useTicketsRefetchFlag();
-  const setTicketsRefetchFlag = useSetTicketsRefetchFlag();
+  const ticketsRefetchFlag = useRefetchFlag();
+  const setTicketsRefetchFlag = useSetRefetchFlag();
   const setAlert = useSetAlert();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
