@@ -1,8 +1,8 @@
 import express, { NextFunction, Request, Response } from 'express';
-import { ITicketActivity, Ticket, TicketActivity } from '../models/ticketModel';
-import { User } from '../models/userModel';
+import { ITicketActivity, Ticket, TicketActivity } from '../models/ticketModel.js';
+import { User } from '../models/userModel.js';
 import mongoose from 'mongoose';
-import { tokenIsValid } from '../helpers/authorizationHelpers';
+import { tokenIsValid } from '../helpers/authorizationHelpers.js';
 
 const router = express.Router();
 

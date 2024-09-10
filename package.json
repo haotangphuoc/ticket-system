@@ -2,19 +2,21 @@
   "name": "ticket-system",
   "version": "1.0.0",
   "description": "This is a ticket management system project!",
-  "main": "build/src/index.js",
+  "main": "build/index.js",
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "db": "json-server --watch db.json --port 3000",
     "dev": "nodemon --watch src --exec tsx src/index.ts",
-    "build": "tsc"
+    "build": "tsc",
+    "start": "node build/index.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "@eslint/js": "^9.9.1",
+    "@flydotio/dockerfile": "^0.5.8",
     "@types/bcrypt": "^5.0.2",
     "@types/cors": "^2.8.17",
     "@types/jsonwebtoken": "^9.0.6",

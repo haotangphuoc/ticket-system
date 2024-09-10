@@ -1,7 +1,7 @@
 import express, { Request, Response, NextFunction } from 'express';
-import { Organization } from '../models/organizationModel';
-import { IUser } from '../models/userModel';
-import { tokenIsValid } from '../helpers/authorizationHelpers';
+import { Organization } from '../models/organizationModel.js';
+import { IUser } from '../models/userModel.js';
+import { tokenIsValid } from '../helpers/authorizationHelpers.js';
 
 const router = express.Router();
 

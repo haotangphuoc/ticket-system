@@ -2,7 +2,7 @@ import bcrypt from 'bcrypt';
 import express, { Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
-import { User } from '../models/userModel';
+import { User } from '../models/userModel.js';
 
 dotenv.config();
 

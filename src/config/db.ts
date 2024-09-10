@@ -5,7 +5,7 @@ dotenv.config();
 
 const url = process.env.MONGODB_URI;
 
-export const connectDB = async () => {
+const connectDB = async () => {
   if (!url) {
     console.error("MongoDB URI not provided");
     process.exit(1); 
@@ -19,3 +19,5 @@ export const connectDB = async () => {
     process.exit(1);
   }
 };
+
+export default { connectDB };

@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { UserGetByIdFields, UserIncomingTicket, UserOutgoingTicket, UserPostParams } from '../interfaces/userInterface';
 
-const BASE_URL = "http://localhost:3000/api/users";
+const BASE_URL = "/api/users";
 const token = window.localStorage.getItem('ticket4MeToken');
 
 const getUserById = async (userId: string): Promise<UserGetByIdFields> => {

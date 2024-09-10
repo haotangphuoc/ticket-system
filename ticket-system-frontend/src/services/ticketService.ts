@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { TicketGetByIdFields, TicketActivityPostParams, TicketPostParams } from '../interfaces/ticketInterface';
 
-const BASE_URL = "http://localhost:3000/api/tickets";
+const BASE_URL = "/api/tickets";
 const token = window.localStorage.getItem("ticket4MeToken");
 
 // Get ticket by id

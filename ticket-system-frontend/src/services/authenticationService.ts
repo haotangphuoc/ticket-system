@@ -2,7 +2,7 @@ import axios from 'axios';
 import { LoginReturnFields, UserLoginParams } from '../interfaces/authenticationInterface';
 import { UserGetByIdFields } from '../interfaces/userInterface';
 
-const BASE_URL = "http://localhost:3000/api/authentication";
+const BASE_URL = "/api/authentication";
 
 const login = async (userCredentials: UserLoginParams): Promise<LoginReturnFields> => {
   const res = await axios.post(`${BASE_URL}/login`, userCredentials);

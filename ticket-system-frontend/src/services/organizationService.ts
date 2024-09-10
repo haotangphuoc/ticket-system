@@ -1,7 +1,7 @@
 import axios from "axios";
 import { OrganizationUserGetFields } from "../interfaces/organizationInterface";
 
-const BASE_URL = 'http://localhost:3000/api/organizations'
+const BASE_URL = '/api/organizations'
 
 // Fetch incoming tickets for a user (administrators)
 const getOrganizationUsers = async (organizationId: string): Promise<OrganizationUserGetFields[]> => {
